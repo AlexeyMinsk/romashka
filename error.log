@@ -1,0 +1,5 @@
+[Fri Nov 03 15:47:22.579716 2017] [mpm_winnt:notice] [pid 8680:tid 588] AH00455: Apache/2.4.27 (Win64) PHP/7.1.9 configured -- resuming normal operations
+[Fri Nov 03 15:47:22.580719 2017] [mpm_winnt:notice] [pid 8680:tid 588] AH00456: Apache Lounge VC15 Server built: Jul  7 2017 12:46:00
+[Fri Nov 03 15:47:22.581221 2017] [core:notice] [pid 8680:tid 588] AH00094: Command line: 'C:\\Apache24\\bin\\httpd.exe -d C:/Apache24'
+[Fri Nov 03 15:47:22.601753 2017] [mpm_winnt:notice] [pid 8680:tid 588] AH00418: Parent: Created child process 12180
+[Fri Nov 03 15:47:24.044644 2017] [mpm_winnt:notice] [pid 12180:tid 520] AH00354: Child: Starting 64 worker threads.
