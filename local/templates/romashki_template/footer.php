@@ -1,5 +1,7 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();?>
+
 <footer class="g-footer container-fluid footer_text footer__bg">
+
     <div class="container">
         <div class="row">
             <div class="row__inline-blocks text_center__mid-xs">
@@ -44,12 +46,13 @@
                     <div class="fl_left">
                         2016 "Romashka.by" Магазин цветов в г.Молодечно
                     </div>
-                    <div class="fl_right ">Разработка сайта - <a target="_blank" href="imedia.by"><img src="img/im-logo.png" alt="img"></a></div>
+                    <div class="fl_right ">Разработка сайта - <a target="_blank" href="imedia.by"><img src="<?=SITE_DIR.'img/im-logo.png'?>" alt="img"></a></div>
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
 <div id="popup-enter" data-effect="mfp-zoom-in" class="mfp-with-anim white-popup mfp-hide clearfix">
     <div class="popup_header">
         <div class="title_line_horizontal title_line_decor">
@@ -162,16 +165,15 @@
     </div>
 </div>
 
-<script src="js/vendor/jquery.2.1.4.min.js"></script>
-<script src="js/vendor/collapse.min.js"></script>
-<script src="js/vendor/dropdown.min.js"></script>
-<script src="js/vendor/pushy.min.js"></script>
-<script src="js/vendor/transition.min.js"></script>
-<script src="js/vendor/jquery.magnific-popup.min.js"></script>
-<script src="js/vendor/owl.carousel.min.js"></script>
-
-
-<script src="js/main.js"></script>
+<script src="<?=SITE_DIR.'js/vendor/jquery.2.1.4.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/collapse.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/dropdown.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/pushy.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/transition.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/jquery.magnific-popup.min.js'?>"></script>
+<script src="<?=SITE_DIR.'js/vendor/owl.carousel.min.js'?>"></script>
+<?$APPLICATION->ShowProperty('uniqueFooterScript');?>
+<script src="<?=SITE_DIR.'js/main.js'?>"></script>
 
 </body>
 </html>

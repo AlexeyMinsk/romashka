@@ -1,29 +1,29 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $aMenuLinks = Array(
 	Array(
-		"Цветы", 
-		"about/howto/", 
+		"О нас", 
+		"/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Букеты", 
-		"card/", 
+		"Способы оплаты", 
+		"/", 
 		Array(), 
 		Array(), 
 		"" 
 	),
 	Array(
-		"Подарки", 
-		"about/", 
+		"Доставка", 
+		"/", 
 		Array(), 
 		Array(), 
 		"" 
 	),	
 	Array(
-		"Свадебная флористика", 
-		"about/guaranty/", 
+		"Контакты", 
+		"/", 
 		Array(), 
 		Array(), 
 		"" 
