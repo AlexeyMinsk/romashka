@@ -3,7 +3,11 @@
 	$APPLICATION->SetTitle("Каталог");
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
-	//$APPLICATION->SetPageProperty('uniqueDataFooter', '</div>');
+	$APPLICATION->SetPageProperty('uniqueDataFooter', '</div>');
+	$APPLICATION->SetPageProperty('uniqueFooterScript', '
+	<script src="/js/vendor/tab.min.js"></script>
+	<script src="/js/vendor/menu_collapse.min.js"></script>
+	');
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 ?>
 <div class="container">
@@ -23,81 +27,10 @@
 		<div class="container">
 			<div class="row">
 				<aside class="col-md-3 hidden-sm hidden-mid-xs hidden-xs">
-					
-					<nav class="aside_menu-2">
-						<ul class="aside_menu-2__list">
-							<li class="active">
-								<a href="#">Цветы <i class="arr_submenu-2 icon_menu__caret"></i></a>
-								<ul class="aside_menu-2__list-2">
-									<li><a href="#">Срезанные <i class="icon_menu__caret"></i></a>
-										<ul class="aside_menu-2__list-3">
-											<li><a href="#">Альстромерии</a></li>
-											<li><a href="#">Розы</a></li>
-											<li><a href="#">Хризантемы</a></li>
-											<li><a href="#">Тюльпаны</a></li>
-											<li><a href="#">Ирисы</a></li>
-											<li><a href="#">Герберы</a></li>
-											<li><a href="#">Каллы</a></li>
-											<li><a href="#">Лилии</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Комнатные <i class="icon_menu__caret"></i></a>
-										<ul class="aside_menu-2__list-3">
-											<li><a href="#">Орхидеи</a></li>
-											<li><a href="#">Цветущие</a></li>
-											<li><a href="#">Кактусовые</a></li>
-											<li><a href="#">Хвойные</a></li>
-											<li><a href="#">Литвенные</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li><a href="#">Букеты <i class="icon_menu__caret"></i></a>
-								<ul class="aside_menu-2__list-2">
-									<li><a href="#">Альстромериями</a></li>
-									<li><a href="#">Розами</a></li>
-									<li><a href="#">Хризантемами</a></li>
-									<li><a href="#">Тюльпанами</a></li>
-									<li><a href="#">Ирисами</a></li>
-									<li><a href="#">Герберами</a></li>
-									<li><a href="#">Лилиями</a></li>
-									<li><a href="#">Гвоздиками</a></li>
-									<li><a href="#">Орхидеями</a></li>
-									<li><a href="#">Подсолнухами</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Композиции <i class="icon_menu__caret"></i></a>
-								<ul class="aside_menu-2__list-2">
-									<li><a href="#">Корзины</a></li>
-									<li><a href="#">Фигуры</a></li>
-									<li><a href="#">Сердца</a></li>
-									<li><a href="#">Мини компазиции</a></li>
-									<li><a href="#">К 8 марта и дн.Св.Валентина</a></li>
-									<li><a href="#">Ко дню Матери</a></li>
-									<li><a href="#">Новогодние</a></li>
-									<li><a href="#">С искусственными цветами</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Подарки <i class="icon_menu__caret"></i></a>
-								<ul class="aside_menu-2__list-2">
-									<li><a href="#">Мягкая игрушка</a></li>
-									<li><a href="#">Конфеты</a></li>
-									<li><a href="#">Открытки</a></li>
-									<li><a href="#">Конверты для денег</a></li>
-									<li><a href="#"> Шары с гелием</a></li>
-									<li><a href="#">Шары с воздухом</a></li>
-									<li><a href="#">Игрушки из шаров</a></li>
-									<li><a href="#">Свечи</a></li>
-									<li><a href="#">Кашпо &amp; Горшки</a></li>
-								</ul>
-							</li>
-							<li><a href="#">Свадебная флористика</a></li>
-						</ul>
-					</nav>
-					
-					
-					
-					
+					<?$APPLICATION->IncludeComponent("bitrix:menu", "left_menu", array(
+						"ROOT_MENU_TYPE" => "product", 
+						"MAX_LEVEL" => "3"
+					), false);?>
 				</aside>
 				<?$APPLICATION->IncludeComponent(
 					"bitrix:catalog", 
