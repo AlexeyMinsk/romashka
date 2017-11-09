@@ -14,7 +14,6 @@
 		});
 	})
     // slider rotation
-	console.log($('.spritespin'));
     if ($('.spritespin').length) {
         $('.spritespin').spritespin({
             source: SpriteSpin.sourceArray('/img/rad_zoom_{frame}.jpg', { frame: [1,34], digits: 3 }),
@@ -51,7 +50,6 @@
 		});
 	};
 	// Magnific Popup
-	
 	var popupInline = $('.open-popup-inline');
 	if (popupInline.length) {
 		popupInline.magnificPopup({

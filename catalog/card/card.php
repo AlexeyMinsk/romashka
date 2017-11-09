@@ -12,6 +12,7 @@ $APPLICATION->SetPageProperty('uniqueDataHeader', "
 	</script>
 	"
 );
+$APPLICATION->SetPageProperty('uniqueFooterScript', "<script src=".SITE_DIR."js/vendor/spritespin.min.js"."></script>");
 ?>
     <div class="container">
         <div class="row">
@@ -36,30 +37,21 @@ $APPLICATION->SetPageProperty('uniqueDataHeader', "
                             </div>
                         
                         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-0 text_center">
-                            <div class="card_carousel owl-carousel">
-                                    <div class="item"><div class="spritespin"></div></div>
-                                    <div class="item"><img src="<?=SITE_DIR."img/slider_card-2.jpg"?>" alt="img"></div>
-                                    <div class="item"><img src="<?=SITE_DIR."img/slider_card-1.jpg"?>" alt="img"></div>
-                                    <div class="item"><img src="<?=SITE_DIR."img/slider_card-2.jpg"?>" alt="img"></div>
-                                    <div class="item"><img src="<?=SITE_DIR."img/slider_card-1.jpg"?>" alt="img"></div>
-                            </div>
-                            <div class="dotsContentCard ">
-                                <div class="btn_secondary _rotate">
-                                    <img src="<?=SITE_DIR."img/slider_card-3-min.jpg"?>" alt="img">
-                                </div>
-                                <div class="btn_secondary">
-                                    <img src="<?=SITE_DIR."img/slider_card-1-min.jpg"?>" alt="img">
-                                </div>
-                                <div class="btn_secondary">
-                                    <img src="<?=SITE_DIR."img/slider_card-2-min.jpg"?>" alt="img">
-                                </div>
-                                <div class="btn_secondary">
-                                    <img src="<?=SITE_DIR."img/slider_card-2-min.jpg"?>" alt="img">
-                                </div>
-                                <div class="btn_secondary">
-                                    <img src="<?=SITE_DIR."img/slider_card-2-min.jpg"?>" alt="img">
-                                </div>
-                            </div>
+                           <?$APPLICATION->IncludeComponent("lat:carousel", "", array(
+							"IMG_LIST" => array(
+								SITE_DIR."img/slider_card-2.jpg",
+								SITE_DIR."img/slider_card-1.jpg",
+								SITE_DIR."img/slider_card-2.jpg",
+								SITE_DIR."img/slider_card-1.jpg"
+								),
+							"IMG_LIST_MIN" => array(
+								SITE_DIR."img/slider_card-2-min.jpg",
+								SITE_DIR."img/slider_card-1-min.jpg",
+								SITE_DIR."img/slider_card-2-min.jpg",
+								SITE_DIR."img/slider_card-1-min.jpg"
+								),
+							"IMG_MIN_ROTATE_SRC" => SITE_DIR."img/slider_card-3-min.jpg"
+						), false);?>	
                         </div>
                         <div class="col-xs-12 col-mid-xs-12 col-sm-12 col-md-8">
                             <div class="row mb_2 clearfix">

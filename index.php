@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-xs-12 mt_8">
                             <ul class="list_reser fz_18">
-                                <li><a target="_blank" class="mb_1 i_block" href="index.php">Главная страница</a></li>
+                                <li><a target="_blank" class="mb_1 i_block" href="main/main.php">Главная страница</a></li>
                                 <li><a target="_blank" class="mb_1 i_block" href="catalog/">Каталог</a></li>
                                 <li><a target="_blank" class="mb_1 i_block" href="catalog/card/card.php">Карточка товара</a></li>
                                 <li><a target="_blank" class="mb_1 i_block" href="catalog/card/card_rose.php">Карточка товара (розы)</a></li>
@@ -39,5 +39,4 @@
 		</section>
 	</main>
 </div>
-
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

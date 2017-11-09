@@ -1,8 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 	IncludeTemplateLangFile(__FILE__);
-	//CJSCore::Init(array("fx"));
-	//$curPage = $APPLICATION->GetCurPage(true);
-	//$theme = COption::GetOptionString("main", "romashki_template", "yelow", SITE_ID);
 ?>
 <!DOCTYPE html>
 <html lang="ru-RU">
@@ -79,7 +76,10 @@
 						</div>
 					</div>
 				</div>        
-				<?$APPLICATION->IncludeComponent("bitrix:menu", "table_menu", array(), false);?>
+				<?$APPLICATION->IncludeComponent("bitrix:menu", "table_menu", array(
+					"ROOT_MENU_TYPE" => "product", 
+					"MAX_LEVEL" => "3"
+					), false);?>
 			</div>
 		</header>
 	<?$APPLICATION->ShowNavChain();?>		

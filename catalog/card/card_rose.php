@@ -228,8 +228,7 @@
 								<div class="card_preview__lnk">Шары с воздухом</div>
 							</a>
 						</div>
-					</div>
-					
+					</div>	
 				</div>
 			</div>
 		</div>
