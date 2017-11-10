@@ -7,9 +7,9 @@
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js", "/js/vendor/menu_collapse.min.js"));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-		"/include/card_in_basket.php",
-		"/include/in_wish.php",
-		"/include/popup-rduction.php"
+	"/include/card_in_basket.php",
+	"/include/in_wish.php",
+	"/include/popup-rduction.php"
 	));
 ?>	
 <main>
@@ -310,4 +310,47 @@
 		</div>
 	</section>
 </main>
+<?
+	/*if (CModule::IncludeModule("sale"))
+	{
+		$arFields = array(
+		"PRODUCT_ID" => 2,
+		"PRICE" => 138.54,
+		"CURRENCY" => "RUB",
+		"LID" => "s1",
+		"NAME" => "Розы",
+		"PREVIEW_PICTURE_SRC" => "/img/cat-5.jpg"
+		);
+		CSaleBasket::Add($arFields);
+	}*/
+	
+	/** int $productId ID товара */
+/** int $quantity количество */
+$quantity = 1;
+$productId = 2;
+if ($item = $basket->getExistsItem('catalog', $productId)) {
+    $item->setField('QUANTITY', $item->getQuantity() + $quantity);
+}
+else {
+    $item = $basket->createItem('catalog', $productId);
+    $item->setFields(array(
+        'QUANTITY' => $quantity,
+        'CURRENCY' => Bitrix\Currency\CurrencyManager::getBaseCurrency(),
+        'LID' => Bitrix\Main\Context::getCurrent()->getSite(),
+        'PRODUCT_PROVIDER_CLASS' => 'CCatalogProductProvider',
+    ));
+    /* 
+    Если вы хотите добавить товар с произвольной ценой, нужно сделать так:
+    $item->setFields(array(
+        'QUANTITY' => $quantity,
+        'CURRENCY' => Bitrix\Currency\CurrencyManager::getBaseCurrency(),
+        'LID' => Bitrix\Main\Context::getCurrent()->getSite(),
+        'PRICE' => $customPrice,
+        'CUSTOM_PRICE' => 'Y',
+   ));
+   */
+}
+$basket->save();
+	
+?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

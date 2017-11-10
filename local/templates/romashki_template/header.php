@@ -104,5 +104,6 @@
 			'/js/vendor/jquery.magnific-popup.min.js',
 			'/js/vendor/transition.min.js',
 			'/js/vendor/owl.carousel.min.js',
+			//'/js/basket.js'
 			);
 		?>				
