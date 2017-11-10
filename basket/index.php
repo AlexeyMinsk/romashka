@@ -1,32 +1,21 @@
 <?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-	$APPLICATION->SetTitle("Каталог");
+	$APPLICATION->SetTitle("Корзина");
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
-		$APPLICATION->SetPageProperty('uniqueFooterScript', '
-	<script src="/js/vendor/tab.min.js"></script>
-	');
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
+	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js"));
+	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
+		"/include/popup-rduction.php"
+	));
 ?>
-<div class="container">
-	<div class="row">
-	<?echo $APPLICATION->GetNavChain();?>
-		<!--<div class="col-xs-12">
-			<ol class="breadcrumb mb_0">
-				<li><a href="#">Главная страница</a></li>
-				<li><a href="#">Каталог</a></li>
-				<li class="active">Розы</li>
-			</ol>
-		</div>-->
-	</div>
-</div>
 <main>
 	<div class="g-main">
 		<div class="g-main_i container">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class=" mt_2">
-						<h1 class="">Корзина</h1>
+						<h1 class=""><?=$APPLICATION->GetTitle(/*'not_title'*/)?></h1>
 					</div>
 					<div class="basket_tabs">
 						<!-- Nav tabs -->

@@ -1,7 +1,12 @@
 <?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-	$APPLICATION->SetTitle("Страницане найдена");
-	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
+	$APPLICATION->SetTitle("Страница не найдена");
+	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
+	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
+		"/include/card_in_basket.php",
+		"/include/in_wish.php",
+		"/include/popup-rduction.php"
+	));
 ?>
 <div class="g-wrapper">
     <main>

@@ -7,27 +7,20 @@
 	<script>
     document.getElementsByTagName('body')[0].classList.add('load_opacity');
     document.addEventListener('DOMContentLoaded', function(){
-	document.getElementsByTagName('body')[0].classList.remove('load_opacity');
+		document.getElementsByTagName('body')[0].classList.remove('load_opacity');
     });
 	</script>
 	<div class='g-wrapper'>
 	"
 	);
-	$APPLICATION->SetPageProperty('uniqueFooterScript', "<script src=".SITE_DIR."js/vendor/spritespin.min.js"."></script>");
+	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js", "/js/vendor/spritespin.min.js"));
+	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
+		"/include/card_in_basket.php",
+		"/include/in_wish.php",
+		"/include/popup-rduction.php",
+		"/include/popup-click.php"
+	));
 ?>
-
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<ol class="breadcrumb mb_0">
-				<li><a href="#">Главная страница</a></li>
-				<li><a href="#">Каталог</a></li>
-				<li class="active">Розы</li>
-			</ol>
-		</div>
-	</div>
-</div>
-
 <main>
 	<div class="g-main">
 		<div class="g-main_i container">

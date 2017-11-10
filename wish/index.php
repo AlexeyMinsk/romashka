@@ -5,24 +5,13 @@
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 ?>
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12">
-			<ol class="breadcrumb mb_0">
-				<li><a href="#">Главная страница</a></li>
-				<li><a href="#">Каталог</a></li>
-				<li class="active">Розы</li>
-			</ol>
-		</div>
-	</div>
-</div>
 <main>
 	<div class="g-main">
 		<div class="g-main_i container">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class=" mt_2">
-						<h1 class="">Избранное</h1>
+						<h1 class=""><?=$APPLICATION->GetTitle(/*'not_title'*/)?></h1>
 					</div>
 					<div class="table-responsive">
 						<table class="vertical_align">

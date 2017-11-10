@@ -22,10 +22,17 @@
 				<div class="header_top">
 				    <div class="container">
 						<div class="row">
-							<?$APPLICATION->IncludeComponent("bitrix:menu", "main_menu", array(
-								"ROOT_MENU_TYPE" => "top", 
-								"MAX_LEVEL" => "1"
+							<div class="col-xs-12 col-sm-5 bdb_min-xs mid-xs_text_center">
+								<a class="menu_collapse__btn visible-mid-xs" role="button" data-toggle="collapse" href="#collapsMenu" aria-expanded="false" aria-controls="collapsMenu"> Меню
+								</a>
+								<div class=" menu_collapse__btn menu_collapse__btn-right menu-btn visible-mid-xs">Каталог</div>
+								<div class="clear"></div>
+								<?$APPLICATION->IncludeComponent("bitrix:menu", "main_menu", array(
+									"ROOT_MENU_TYPE" => "top", 
+									"MAX_LEVEL" => "1"
 								), false);?>
+							</div>
+							
 							<div class="col-xs-12 col-mid-xs-12 col-sm-4 col-md-4 header_phone text-center">
 								<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
 									"AREA_FILE_SHOW" => "file",
@@ -61,13 +68,13 @@
 									</div>
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 col-sm-6 col-md-2 text_right text_center__sm">
-									<a href="#" class="wish"><i class="icon i_star"></i>Избранное <span>(4)</span></a>
+									<a href="/wish/" class="wish"><i class="icon i_star"></i>Избранное <span>(4)</span></a>
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 text_center__sm  col-sm-6 col-md-3">
 									<div class="basket">
 										<span class="basket_icon active"></span>
 										<div class="basket_text">
-											<a class="basket__lnk lnk_brd" href="<?=SITE_DIR."basket/basket.php"?>">Ваша корзина <span class="">(5)</span></a>
+											<a class="basket__lnk lnk_brd" href="<?=SITE_DIR."basket/"?>">Ваша корзина <span class="">(5)</span></a>
 											<div class="basket_sum"><strong>25 145 560</strong> руб.</div>
 										</div>
 									</div>
@@ -79,7 +86,23 @@
 				<?$APPLICATION->IncludeComponent("bitrix:menu", "table_menu", array(
 					"ROOT_MENU_TYPE" => "product", 
 					"MAX_LEVEL" => "3"
-					), false);?>
+				), false);?>
 			</div>
 		</header>
-	<?$APPLICATION->ShowNavChain();?>		
+		<?
+			$APPLICATION->ShowNavChain();
+			$APPLICATION->SetPageProperty('not_title', ' ');
+			$includeArr = array(//массив возможных включаемых областей
+			"/include/popup-enter.php",
+			"/include/popup-registration.php"
+			);
+			$scriptsArr = array(
+			'/js/vendor/jquery.2.1.4.min.js',
+			'/js/vendor/collapse.min.js',
+			'/js/vendor/dropdown.min.js',
+			'/js/vendor/pushy.min.js',
+			'/js/vendor/jquery.magnific-popup.min.js',
+			'/js/vendor/transition.min.js',
+			'/js/vendor/owl.carousel.min.js',
+			);
+		?>				

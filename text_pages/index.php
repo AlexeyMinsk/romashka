@@ -3,7 +3,7 @@
 	$APPLICATION->SetTitle("Текстовая страница");
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
-	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
+	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 ?>
 <main>
 	<section class="g-main">
@@ -11,7 +11,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-						<h1>Пример заголовка</h1>
+						<h1><?=$APPLICATION->GetTitle(/*'not_title'*/)?></h1>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.</p>
 						<img src="/img/header_bg.jpg" alt="img">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.</p>

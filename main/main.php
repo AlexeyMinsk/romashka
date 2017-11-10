@@ -2,7 +2,11 @@
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	$APPLICATION->SetTitle("Главная");
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
-	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
+	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
+	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
+		"/include/card_in_basket.php",
+		"/include/in_wish.php"
+	));
 ?>
 <div class="owl-carousel main_carousel">
 <?

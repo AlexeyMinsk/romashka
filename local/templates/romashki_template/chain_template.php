@@ -1,22 +1,13 @@
 <?
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
-global $strChain;
-if(empty($arResult))
-  return "";
-
-$strReturn = '<ul class="breadcrumb-navigation">';
-for($index = 0, $itemSize = count($arResult); $index < $itemSize; $index++)
-{
-   if($index > 0)
-          $strReturn .= '<li><span>&nbsp;&gt;&nbsp;</span></li>';
-   $title = htmlspecialcharsex($arResult[$index]["TITLE"]);
-   if($arResult[$index]["LINK"] <> "")
-          $strReturn .= '<li><a href="'.$arResult[$index]["LINK"].'" title="'.$title.'">'.$title.'</a></li>';
-   else
-          $strReturn .= '<li>'.$title.'</li>';
+if($ITEM_INDEX == 0){
+	$sChainProlog = '<div class="container"><div class="row">';
+	$sChainBody = '<ol class="breadcrumb mb_0">';
 }
-$strReturn .= '</ul>';
-$strChain = $strReturn;
-//return $strReturn;
+if($ITEM_INDEX+1 == $ITEM_COUNT){
+	$sChainEpilog = '</div></div>';
+	$sChainBody .= '<li class="active"><a href="'.$LINK.'">'.$TITLE.'</a></li></ol>';
+}else
+	$sChainBody .= '<li><a href="'.$LINK.'">'.$TITLE.'</a></li>';
 ?>
