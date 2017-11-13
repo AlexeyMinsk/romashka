@@ -40,8 +40,7 @@
             <a href="<?=$item['HREF']?>" class="btn btn-primary btn-lg"><?=$item['HREF_TEXT']?></a>
 		</div>
 	</div>
-	
-	<?endforeach?>
+	<?endforeach;?>
 </div>
 <div class="container-fluid main_label_bg hidden-mid-xs">
     <div class="container">
@@ -62,7 +61,7 @@
 					</div>
 				</div>
 			</div>
-			<?endforeach?>
+			<?endforeach;?>
 		</div>
 	</div>
 </div>

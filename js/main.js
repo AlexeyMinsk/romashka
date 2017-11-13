@@ -64,3 +64,33 @@
 		});
 	};
 }();
+
+document.addEventListener('DOMContentLoaded', startScript);
+
+function startScript(){
+	
+	let miniBasket = document.getElementsByClassName("mini-basket");
+	
+	document.addEventListener("clickBuy", function(event){
+		
+	    let inBasket = document.getElementById("card_in_basket");
+	    let popupImg = inBasket.querySelector(".mg-popup-img");
+	    let popupName = inBasket.querySelector(".card_preview__lnk");
+		
+		BX.ajax({
+			method: 'POST',
+			dataType: 'json',
+			url: '/ajax/mini-basket.php',
+			data: {
+				'ID': 
+			},
+			onsuccess: function (data){
+				console.log(data);
+			}
+		});
+		miniBasket.textContent = 
+	
+		popupImg.src = event.detail.src;
+		popupName.textContent = event.detail.name;
+	});
+}

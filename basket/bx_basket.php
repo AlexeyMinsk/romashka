@@ -11,7 +11,7 @@
 ?>
 <?$APPLICATION->IncludeComponent(
     "bitrix:sale.basket.basket",
-    "romashki_basket",
+    "",
     Array(
     )
 );?>
