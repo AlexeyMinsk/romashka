@@ -36,8 +36,8 @@ function startScript(){
 				"id": id,
 				"userId": userId
 			}
-		}
-		);
+		});
+		
 		document.dispatchEvent(myEvent);
 		sendToBasket(id);
 	}

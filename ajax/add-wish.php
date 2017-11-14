@@ -16,7 +16,6 @@
 				"LOGIN"
 			)
 		));
-		
 		if($userFields = $rsUsers->fetch()){
 		
 			if($userFields['UF_WISH_LIST'] === false)

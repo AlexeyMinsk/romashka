@@ -16,6 +16,5 @@ if(isset($_POST) && $_POST["add_wish"] == "Y"){
 			)
 		)
 	);
-	
 	echo json_encode($rsUsers->fetch()["UF_WISH_LIST"]);
 }
