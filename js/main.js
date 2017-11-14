@@ -66,31 +66,78 @@
 }();
 
 document.addEventListener('DOMContentLoaded', startScript);
+document.addEventListener("changeInBasket", setMiniBasketData);
+let elementsCollection = {
+	miniBasket: {}, 
+	basketSum: {}
+}
 
 function startScript(){
 	
-	let miniBasket = document.getElementsByClassName("mini-basket");
+	elementsCollection.miniBasket = document.getElementsByClassName('basket-quantity')[0];
+	elementsCollection.basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
+	refreshMiniBasket();
+}
+
+function refreshMiniBasket(){//обновить конзину при загрузке страницы
 	
-	document.addEventListener("clickBuy", function(event){
-		
-	    let inBasket = document.getElementById("card_in_basket");
-	    let popupImg = inBasket.querySelector(".mg-popup-img");
-	    let popupName = inBasket.querySelector(".card_preview__lnk");
-		
-		BX.ajax({
-			method: 'POST',
-			dataType: 'json',
-			url: '/ajax/mini-basket.php',
-			data: {
-				'ID': 
-			},
-			onsuccess: function (data){
-				console.log(data);
-			}
-		});
-		miniBasket.textContent = 
-	
-		popupImg.src = event.detail.src;
-		popupName.textContent = event.detail.name;
+	BX.ajax({
+		method: 'POST',
+		dataType: 'json',
+		url: '/ajax/basket.php',
+		data: {
+			'refresh_mini_bask': 'Y'
+		},
+		onsuccess: function (data){
+			elementsCollection.miniBasket.textContent = '(' + data.quantity + ')';
+			elementsCollection.basketSum.textContent = data.totalPrice;
+		}
 	});
 }
+
+function setMiniBasketData(event){//при изменении корзины
+	
+	detail = event.detail;
+	
+	if(detail.sum){
+		if(elementsCollection.basketSum.length)
+		elementsCollection.basketSum.textContent = detail.sum;
+		else{
+			timeShift(elementsCollection, detail);
+		}
+	}
+	if(detail.quantity){
+		if(elementsCollection.miniBasket.length)
+		elementsCollection.miniBasket.textContent = '(' + detail.quantity + ')';
+		else{
+			timeShift(elementsCollection, detail);
+		}
+	}
+	
+	function timeShift(elementsCollection, objVal){//ожидать загрузки документа для обновления мини корзины
+		
+		setTimeout(documentReady, 100);
+		
+		function documentReady(){
+			
+			if(document.readyState == 'interactive' || document.readyState == 'complete'){
+				if(objVal.quantity)
+				elementsCollection.miniBasket.textContent =  '(' + objVal.quantity + ')';
+				else
+				elementsCollection.basketSum.textContent = objVal.sum;
+				}else{
+				setTimeout(documentReady, 100);
+			}
+		}
+	}
+}
+
+document.addEventListener("clickBuy", function(event){
+	
+	let inBasket = document.getElementById("card_in_basket");
+	let popupImg = inBasket.querySelector(".mg-popup-img");
+	let popupName = inBasket.querySelector(".card_preview__lnk");
+	
+	popupImg.src = event.detail.src;
+	popupName.textContent = event.detail.name;
+});

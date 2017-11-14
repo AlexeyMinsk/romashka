@@ -16,10 +16,12 @@ function startScript(){
 	let formOrder = document.forms.order;
 	let formPayment = document.forms.payment;
 	let illustrationOrder = document.getElementsByName('illustration-order')[0];
-	//console.log("illustrationOrder", illustrationOrder);
+	let miniBasketasketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
+	
 	
 	const CARGO_LIMIT = 1000;
 	const CARGO_PRICE = 300;
+	
 	changeSumResult();
 	changeitemQuantity();
 	
@@ -41,7 +43,7 @@ function startScript(){
 		minusArr[i].addEventListener("click", function(event){
 			
 			let counter = this.closest('.counter').getElementsByClassName('counter__inp')[0];
-			counter.value = +counter.value - 1 < 0? 0 : +counter.value - 1;
+			counter.value = +counter.value - 1 < 1 ? 1 : +counter.value - 1;
 			let dataElemId = this.closest('[data-elem-id]');
 			changeSum(dataElemId);
 			changeSumTd(dataElemId.dataset.elemId, counter.value);
@@ -72,7 +74,7 @@ function startScript(){
 	
 	bindingForm();
 	
-	function bindingForm(){
+	function bindingForm(){//связать формы заполняемые пользователями и результ. вывод
 		
 		let conformity = {
 			'addr': function(val){
@@ -84,27 +86,27 @@ function startScript(){
 				date.textContent = val;
 			},
 			'pay': function(val){
-			
+				
 				let delivery = illustrationOrder.querySelector("[name='delivery-method']");
 				let payment = illustrationOrder.querySelector("[name='payment-method']");
-
-				switch(val){
 				
+				switch(val){
+					
 					case '1':
-						delivery.textContent = "Курьером";
-						payment.textContent = "Наличные/пластиковая карта курьеру при доставке";
+					delivery.textContent = "Курьером";
+					payment.textContent = "Наличные/пластиковая карта курьеру при доставке";
 					break;
 					case '2':
-						delivery.textContent = "Самовывоз";
-						payment.textContent = "Наличные/пластиковая в магазине";
+					delivery.textContent = "Самовывоз";
+					payment.textContent = "Наличные/пластиковая в магазине";
 					break;
 					case '3':
-						delivery.textContent = "Курьером";
-						payment.textContent = "Наличные/пластиковая карта курьеру при доставке";
+					delivery.textContent = "Курьером";
+					payment.textContent = "Наличные/пластиковая карта курьеру при доставке";
 					break;
 					default:
-						delivery.textContent = "";
-						payment.textContent = "";
+					delivery.textContent = "";
+					payment.textContent = "";
 					break;
 				}
 			}
@@ -114,13 +116,13 @@ function startScript(){
 		formPayment.addEventListener("change", changeForm);
 		
 		function changeForm(event){
-		
-		let targetName = event.target.name;
-		
-		if(conformity[targetName]){
-			conformity[targetName](this[targetName].value);
+			
+			let targetName = event.target.name;
+			
+			if(conformity[targetName]){
+				conformity[targetName](this[targetName].value);
+			}
 		}
-	}
 	}
 	
 	function changeSumTd(elemId, val){
@@ -130,7 +132,7 @@ function startScript(){
 		counterTd.textContent = val;
 	}
 	
-	function sendAjax(id, val){
+	function sendAjax(id, val){//обновляет корзину
 		
 		BX.ajax({
 			method: 'POST',
@@ -150,7 +152,7 @@ function startScript(){
 		return elem.closest(parentSelector).dataset[data];
 	}
 	
-	function changeSum(parent){
+	function changeSum(parent){//изменение сумму на элементк
 		
 		let price = parseFloat(parent.querySelector('.item-price').textContent); 
 		let quantity = parseFloat(parent.querySelector('.counter__inp').value);
@@ -160,7 +162,7 @@ function startScript(){
 		changeSumResult();
 	}
 	
-	function changeSumResult(){
+	function changeSumResult(){//измененить общую сумму
 		
 		let sum = 0;
 		for(i = 0; i < itemSumArr.length; i++){
@@ -171,9 +173,33 @@ function startScript(){
 		
 		cargoCost.textContent = sum < CARGO_LIMIT ? CARGO_PRICE : 0;
 		orderSum.textContent = sum + +cargoCost.textContent;
+		initEvent("changeInBasket", {
+			detail:{
+				"sum": sum
+			}
+		});
 	}
 	
-	function changeitemQuantity(){
+	function changeitemQuantity(){//изменить общее кол-во товаров
+		
 		itemQuantity.textContent = counterArr.length;
+		tempObj = {
+			"quantity": itemQuantity.textContent
+		};
+		
+		if(counterArr.length < 1){
+			miniBasketasketSum.textContent = 0;
+			tempObj.sum = 0;
+		}
+		
+		initEvent("changeInBasket", {
+			detail: tempObj
+		});
+	}
+	
+	function initEvent(eventName, objDetail){
+		
+		let e = new CustomEvent(eventName, objDetail);
+		document.dispatchEvent(e);
 	}
 }

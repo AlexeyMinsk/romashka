@@ -74,8 +74,8 @@
 									<div class="basket">
 										<span class="basket_icon active"></span>
 										<div class="basket_text">
-											<a class="basket__lnk lnk_brd" href="<?=SITE_DIR."basket/"?>">Ваша корзина <span class="mini-basket"></span></a>
-											<div class="basket_sum"><strong>25 145 560</strong> руб.</div>
+											<a class="basket__lnk lnk_brd" href="<?=SITE_DIR."basket/"?>">Ваша корзина <span class="basket-quantity"></span></a>
+											<div class="basket_sum"><strong>0</strong> руб.</div>
 										</div>
 									</div>
 								</div>
