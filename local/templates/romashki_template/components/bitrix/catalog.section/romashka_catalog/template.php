@@ -2,20 +2,19 @@
 <section class="row__inline-blocks mt_3">
 	<?foreach($arResult['ITEMS'] as $key => $item){
 		if(isset($item['DETAIL_PICTURE']) && is_array($item['DETAIL_PICTURE']) )
-		$DETAIL_PICTURE = $item['DETAIL_PICTURE'];
+			$DETAIL_PICTURE = $item['DETAIL_PICTURE'];
 		if(isset($item['PREVIEW_PICTURE']) && is_array($item['PREVIEW_PICTURE']) )
-		$PREVIEW_PICTURE = $item['PREVIEW_PICTURE'];
+			$PREVIEW_PICTURE = $item['PREVIEW_PICTURE'];
 		$PICTURE = $PREVIEW_PICTURE ? $PREVIEW_PICTURE : $DETAIL_PICTURE;
 		if(empty($PICTURE))
-		$PICTURE = array('SRC' => '/img/no-foto.jpg');	
+			$PICTURE = array('SRC' => '/img/no-foto.jpg');	
 	?>
-	
 	<div class="col-xs-12 col-mid-xs-6 col-sm-4 ">
 		<div class="card_preview" data-card-id=<?=$item['ID']?>>
 			<div class="card_preview__wrap_hidden">
 				<a class="card_preview__lnk_pic" href="#">
 					<img alt="img" src="<?=$PICTURE['SRC']?>" class="card_preview__pic" title="img">
-					<?if($key%3 == 0){?>
+					<?if($key%3 == 0):?>
 						<span class="label_card">
 							<span class="label_info _new">
 							</span> <br>
@@ -26,7 +25,7 @@
 							<span class="label_info _discount">
 							</span><br>
 						</span>
-					<?}?>
+					<?endif;?>
 				</a>
 				<div class="card_preview__info ">
 					<div class="raiting text_center">
@@ -50,6 +49,7 @@
 <?
 	$itemsForJs = array();
 	$imgSrcArr = array();
+	
 	foreach($arResult["ITEMS"] as $item){
 
 		$itemsForJs[$item['ID']] = array(
@@ -66,4 +66,5 @@
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
 	var imagesSrc = <?=CUtil::PhpToJSObject($imgSrcArr)?>;
+	var userId = <?=$USER->GetId()?>;
 </script>

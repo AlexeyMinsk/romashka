@@ -67,15 +67,44 @@
 
 document.addEventListener('DOMContentLoaded', startScript);
 document.addEventListener("changeInBasket", setMiniBasketData);
+document.addEventListener("clickBuy", function(event){
+	
+	let inBasket = document.getElementById("card_in_basket");
+	let popupImg = inBasket.querySelector(".mg-popup-img");
+	let popupName = inBasket.querySelector(".card_preview__lnk");
+	
+	popupImg.src = event.detail.src;
+	popupName.textContent = event.detail.name;
+});
+document.addEventListener("addWish", function(event){
+
+	BX.ajax({
+		method: 'POST',
+		dataType: 'json',
+		url: '/ajax/add-wish.php',
+		data: {
+			'add_wish': 'Y',
+			'ID': event.detail.id,
+			'user_id': event.detail.userId
+		},
+		onsuccess: function (data){
+			console.log(data);
+		}
+	});
+	
+	event.preventDefault();
+});
 let elementsCollection = {
 	miniBasket: {}, 
-	basketSum: {}
+	basketSum: {}, 
+	whishlist: {}
 }
 
 function startScript(){
 	
 	elementsCollection.miniBasket = document.getElementsByClassName('basket-quantity')[0];
 	elementsCollection.basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
+	elementsCollection.whishlist = document.getElementsByClassName('counter-whishlist')[0];
 	refreshMiniBasket();
 }
 
@@ -131,13 +160,3 @@ function setMiniBasketData(event){//при изменении корзины
 		}
 	}
 }
-
-document.addEventListener("clickBuy", function(event){
-	
-	let inBasket = document.getElementById("card_in_basket");
-	let popupImg = inBasket.querySelector(".mg-popup-img");
-	let popupName = inBasket.querySelector(".card_preview__lnk");
-	
-	popupImg.src = event.detail.src;
-	popupName.textContent = event.detail.name;
-});

@@ -68,7 +68,8 @@
 									</div>
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 col-sm-6 col-md-2 text_right text_center__sm">
-									<a href="/wish/" class="wish"><i class="icon i_star"></i>Избранное <span>(4)</span></a>
+									<a href="/wish/" class="wish"><i class="icon i_star"></i>Избранное 
+										(<span class="counter-whishlist">0</span>)</a>
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 text_center__sm  col-sm-6 col-md-3">
 									<div class="basket">
@@ -104,6 +105,5 @@
 			'/js/vendor/jquery.magnific-popup.min.js',
 			'/js/vendor/transition.min.js',
 			'/js/vendor/owl.carousel.min.js',
-			//'/js/basket.js'
 			);
 		?>				
