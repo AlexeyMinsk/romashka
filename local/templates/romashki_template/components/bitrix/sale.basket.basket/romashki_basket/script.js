@@ -21,8 +21,8 @@ function startScript(){
 	const CARGO_LIMIT = 1000;
 	const CARGO_PRICE = 300;
 	
-	//changeSumResult();
-	//changeitemQuantity();
+	changeSumResult();
+	changeitemQuantity();
 
 	for(let i = 0; i < counterArr.length; i++){
 		

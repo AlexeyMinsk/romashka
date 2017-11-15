@@ -8,11 +8,11 @@
                 <div class="col-xs-12 col-mid-xs-6 col-sm-3">
                     <div class="footer_title">Информация</div>
                     <ul class="footer_menu list_reset">
-                        <li><a href="#">Глвная</a></li>
-                        <li><a href="#">Услуги</a></li>
-                        <li><a href="#">Акции</a></li>
-                        <li><a href="#">Партнеры</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="/">Глвная</a></li>
+                        <li><a href="javascript:void(0)">Услуги</a></li>
+                        <li><a href="javascript:void(0)">Акции</a></li>
+                        <li><a href="javascript:void(0)">Партнеры</a></li>
+                        <li><a href="/contacts/">Контакты</a></li>
 					</ul>
 				</div>
                 <div class="col-xs-12 col-mid-xs-6 col-sm-3">
@@ -53,7 +53,7 @@
 	</div>
 </footer>
 <?
-	foreach($includeArr as $path)//подключение включаемых областей
+	foreach($includeArr as $path)//подключение скриптов
 		if(file_exists($_SERVER["DOCUMENT_ROOT"].$path))
 			require_once($_SERVER["DOCUMENT_ROOT"].$path);
 	

@@ -4,35 +4,35 @@
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-		"/include/card_in_basket.php",
-		"/include/in_wish.php"
+	"/include/card_in_basket.php",
+	"/include/in_wish.php"
 	));
 ?>
 <div class="owl-carousel main_carousel">
-<?
-	$carouselArr = array(
+	<?
+		$carouselArr = array(
 		array(
-			"IMG" => "/img/sl-1.jpg",
-			"HREF" => "#",
-			"TEXT" => "Свадебная флористика",
-			"HREF_TEXT" => "Подробнее"
+		"IMG" => "/img/sl-1.jpg",
+		"HREF" => "#",
+		"TEXT" => "Свадебная флористика",
+		"HREF_TEXT" => "Подробнее"
 		),
 		array(
-			"IMG" => "/img/sl-1.jpg",
-			"HREF" => "#",
-			"TEXT" => "Свадебная флористика",
-			"HREF_TEXT" => "Подробнее"
+		"IMG" => "/img/sl-1.jpg",
+		"HREF" => "#",
+		"TEXT" => "Свадебная флористика",
+		"HREF_TEXT" => "Подробнее"
 		),
 		array(
-			"IMG" => "/img/sl-1.jpg",
-			"HREF" => "#",
-			"TEXT" => "Свадебная флористика",
-			"HREF_TEXT" => "Подробнее"
+		"IMG" => "/img/sl-1.jpg",
+		"HREF" => "#",
+		"TEXT" => "Свадебная флористика",
+		"HREF_TEXT" => "Подробнее"
 		)
-	);	
-	
-	foreach($carouselArr as $item):
-?>
+		);	
+		
+		foreach($carouselArr as $item):
+	?>
     <div class="item">
         <img src="<?=$item['IMG']?>" alt="img">
         <div class="main_carousel__info_wrap">
@@ -45,13 +45,13 @@
 <div class="container-fluid main_label_bg hidden-mid-xs">
     <div class="container">
         <div class="row">
-		<?
-			$main_label_arr = array(
+			<?
+				$main_label_arr = array(
 				"Зачем куда-то ходить? Доставим бесплатно!",
 				"Всегда только свежие цветы!",
 				"Пришлем фото Вашего букета!"
-			);
-		?>
+				);
+			?>
 			<?foreach($main_label_arr as $text):?>
             <div class="col-xs-12 col-sm-4">
                 <div class="main_label">
@@ -72,138 +72,25 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-                            
-                            <div class="h2 text_center _upper title_line_horizontal">
-                                <span>Хиты продаж</span>
-							</div>
-                            
-                            
-                            <section class="row__inline-blocks mt_3">
-								
-							<?
-								$cardArr = array(
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-2.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Односторонний букет",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-5.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Круглые букеты. Круглые букеты. Круглые букеты",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-2.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Односторонний букет",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-5.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Круглые букеты. Круглые букеты. Круглые букеты",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-5.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Круглые букеты. Круглые букеты. Круглые букеты",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-3.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-2.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Односторонний букет",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									),
-									array(
-										"CARD_HREF" => "#",
-										"IMG_SRC" => "/img/cat-5.jpg",
-										"RAITING" => "/img/raiting.png",
-										"CARD_PREW_TITLE" => "Нижнее белье Ночь наступает",
-										"CARD_PREW_TEXT" => "Круглые букеты. Круглые букеты. Круглые букеты",
-										"CARD_PREW_PRICE" => "45 568 450 руб.",
-										"CARD_PREW_OLD_PRICE" => "86 454 000 руб.",
-										"WISH_TEXT" => "Добавить в избранное",
-										"IN_BASKET" => "В корзину"
-									)
-								);	
-							?>
 							
-							<?for($i = 0; $i < count($cardArr); $i++):
-							if($i == 4):?>
-                                <div class="h2 text_center _upper title_line_horizontal mb_3">
-                                    <span>Популярные товары</span>
+                            <section class="row__inline-blocks mt_3">
+								<div class="h2 text_center _upper title_line_horizontal">
+									<span>Хиты продаж</span>
 								</div>
-							<?endif?>	
-
-								<div class="col-xs-12 col-mid-xs-6 col-sm-4 col-md-3 ">
-									<div class="card_preview">
-										<div class="card_preview__wrap_hidden">
-											<a class="card_preview__lnk_pic" href="<?=$cardArr[$i]["CARD_HREF"]?>">
-												<img class="card_preview__pic" src="<?=$cardArr[$i]["IMG_SRC"]?>" title="img" alt="img"/>
-											</a>
-											<div class="card_preview__info">
-												<div class="raiting text_center">
-													<img src="<?=$cardArr[$i]["RAITING"]?>" alt="img">
-												</div>
-												<div class="card_preview__prod_name">
-													<a class="card_preview__lnk lnk_brd" href="#" title="<?=$cardArr[$i]["CARD_PREW_TITLE"]?>"><?=$cardArr[$i]["CARD_PREW_TEXT"]?></a>
-												</div>
-												<div class="card_preview__price">
-													<?=$cardArr[$i]["CARD_PREW_PRICE"]?>
-													<span class="card_preview__price_old"><?=$cardArr[$i]["CARD_PREW_OLD_PRICE"]?></span>
-												</div>
-												<a href="#in_wish" class="wish open-popup-inline" data-effect="mfp-zoom-in"><i class="icon i_star"></i><?=$cardArr[$i]["WISH_TEXT"]?></a>
-											</div>
-											<a class="btn btn-primary full_width _upper open-popup-inline" data-effect="mfp-zoom-in" href="#card_in_basket"><?=$cardArr[$i]["IN_BASKET"]?></a>
-										</div>
-									</div>
+								
+								<?$APPLICATION->IncludeComponent("lat:popular", "", array(
+									"IBLOCK_ID" => 1,
+									"COUNTER" => 4
+									));
+								?>
+								<div class="h2 text_center _upper title_line_horizontal mb_3">
+									<span>Популярные товары</span>
 								</div>
-							<?endfor?>
+								<?$APPLICATION->IncludeComponent("lat:popular", "", array(
+									"IBLOCK_ID" => 1,
+									"COUNTER" => 4
+									));
+								?>
 							</section>
 						</div>
 					</div>

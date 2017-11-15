@@ -9,15 +9,12 @@ function startScript(){
 	let inBasket = document.querySelectorAll('[href="#card_in_basket"]');
 	let inWish = document.querySelectorAll('[href="#in_wish"]');
 	let whishlist = document.getElementsByClassName('counter-whishlist')[0];
-	let buyOneClick = document.querySelectorAll('[href="#popup-click"]');
 
 	for(let i = 0; i < inBasket.length; i++)	
 		inBasket[i].addEventListener('click', clickBuyFn);
 	
 	for(let i = 0; i < inWish.length; i++)	
 		inWish[i].addEventListener('click', addWhishListFn);
-	
-	document.addEventListener('click', buyOneClickFn);
 	
 	document.addEventListener("addWish", function(event){
 
@@ -40,12 +37,12 @@ function startScript(){
 
 	function clickBuyFn(event){
 	
-		let id = event.target.closest('[data-card-id]').dataset.cardId;
+		let id = event.target.closest('.card_preview').dataset.cardId;
 		let myEvent = new CustomEvent('clickBuy', {
 			detail:{
 				"id": id,
-				"src": imageSrc,
-				"name": item["NAME"]
+				"src": imagesSrc[id],
+				"name": items[id]["NAME"]
 			}
 		}
 		);
@@ -60,23 +57,11 @@ function startScript(){
 			detail:{
 				"id": id,
 				"userId": userId,
-				"src": imageSrc,
-				"name": item["NAME"]
+				"src": imagesSrc[id],
+				"name": items[id]["NAME"]
 			}
 		});
 		document.dispatchEvent(myEvent);
-	}
-	
-	function buyOneClickFn(event){
-		
-		let parentBlock = document.getElementById('popup-click');
-		let img = parentBlock.getElementsByClassName('popup-click-img')[0];
-		let price = parentBlock.getElementsByClassName('popup-click-price')[0];
-		let name = parentBlock.getElementsByClassName('popup-click-name')[0];
-		
-		img.src = imageSrc;
-		price.textContent = item["PRICE"] + ' руб.';
-		name.textContent = item["NAME"];
 	}
 	
 	function sendToBasket(id){
@@ -87,7 +72,7 @@ function startScript(){
 			url: '/ajax/basket.php',
 			data: {
 				'ajax_basket': 'Y',
-				'item': item,
+				'item': items[id],
 				'refresh_mini_bask': 'Y'
 			},
 			onsuccess: function (data){

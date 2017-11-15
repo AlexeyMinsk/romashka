@@ -1,6 +1,6 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
-	$APPLICATION->SetTitle("Карточка роза");
+	$APPLICATION->SetTitle($arResult['NAME']);
 	$APPLICATION->SetPageProperty('bodyId', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 	$APPLICATION->SetPageProperty('uniqueDataHeader', "
@@ -82,7 +82,7 @@
 										</ul>
 									</div>
 									
-									<div class="btn_group_three">
+									<div class="btn_group_three" data-card-id=<?=$arResult['ORIGINAL_PARAMETERS']['ELEMENT_ID']?>>
 										<a class="btn btn-primary btn-lg open-popup-inline" data-effect="mfp-zoom-in" href="#card_in_basket">
 											<i class="icon icon-cart-plus"></i> В корзину
 										</a>
@@ -229,3 +229,24 @@
 	</div>
 </main>
 </div>
+<?	
+	$itemsForJs = array(
+		"PRODUCT_ID" => $arResult['ORIGINAL_PARAMETERS']['ELEMENT_ID'],
+		"PRICE" => $arResult['PRICES']['BASE_PRICE']['DISCOUNT_VALUE'],
+		"CURRENCY" => "RUB",
+		"LID" => "s1",
+		"NAME" => $arResult['NAME']
+	);
+	
+	$imageSrc = $arResult['DETAIL_PICTURE']['SRC'];
+		
+	if($USER->IsAuthorized())
+		$userId = $USER->GetId();
+	else
+		$userId = false;
+?>
+<script>
+	var item = <?=CUtil::PhpToJSObject($itemsForJs)?>;
+	var userId = <?=$userId?>;
+	var imageSrc = '<?=$imageSrc?>';
+</script>	
