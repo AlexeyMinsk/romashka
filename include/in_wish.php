@@ -8,15 +8,15 @@
     <div class="col-xs-offset-1 col-xs-10 popup_wrap text_center">
         <div class="text_center">
             <div class="mb_1">
-                <img src="/img/card_preview.jpg" alt="img">
+                <img src="/img/no-foto.jpg" alt="img" class="in-wish-popup-img">
 			</div>
-            <div class="card_preview__lnk mb_2">
+            <div class="card_preview__lnk mb_2 in-wish-popup-text">
                 Односторонний букет
 			</div>
 		</div>
 		
-        <a href="#" class="btn btn-primary">Продолжить покупки</a>
-        <a href="#" class="btn btn-primary">Перейти в избранное</a>
+        <a href="javascript:void(0)" class="btn btn-primary" onclick="$.magnificPopup.close();">Продолжить покупки</a>
+        <a href="/wish/" class="btn btn-primary">Перейти в избранное</a>
 		
 	</div>
 </div>

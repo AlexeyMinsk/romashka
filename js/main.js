@@ -76,36 +76,29 @@ document.addEventListener("clickBuy", function(event){
 	popupImg.src = event.detail.src;
 	popupName.textContent = event.detail.name;
 });
-document.addEventListener("addWish", function(event){
 
-	BX.ajax({
-		method: 'POST',
-		dataType: 'json',
-		url: '/ajax/add-wish.php',
-		data: {
-			'add_wish': 'Y',
-			'ID': event.detail.id,
-			'user_id': event.detail.userId
-		},
-		onsuccess: function (data){
-			console.log(data);
-		}
-	});
-	
-	event.preventDefault();
-});
 let elementsCollection = {
 	miniBasket: {}, 
-	basketSum: {}, 
-	whishlist: {}
+	basketSum: {}
 }
+
+
+document.addEventListener("addWish", function(event){
+
+	let inWish = document.getElementById("in_wish");
+	let popupImg = inWish.getElementsByClassName("in-wish-popup-img")[0];
+	let popupName = inWish.getElementsByClassName("in-wish-popup-text")[0];
+
+	popupImg.src = event.detail.src;
+	popupName.textContent = event.detail.name;
+	});
 
 function startScript(){
 	
 	elementsCollection.miniBasket = document.getElementsByClassName('basket-quantity')[0];
 	elementsCollection.basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
-	elementsCollection.whishlist = document.getElementsByClassName('counter-whishlist')[0];
 	refreshMiniBasket();
+	refreshWishlist();
 }
 
 function refreshMiniBasket(){//обновить конзину при загрузке страницы
@@ -120,6 +113,22 @@ function refreshMiniBasket(){//обновить конзину при загрузке страницы
 		onsuccess: function (data){
 			elementsCollection.miniBasket.textContent = '(' + data.quantity + ')';
 			elementsCollection.basketSum.textContent = data.totalPrice;
+		}
+	});
+}
+
+function refreshWishlist(){
+	
+		BX.ajax({
+		method: 'POST',
+		dataType: 'json',
+		url: '/ajax/add-wish.php',
+		data: {
+			'get_wish': 'Y',
+			'user_id':1//заглушка
+		},
+		onsuccess: function (data){
+			document.getElementsByClassName('counter-whishlist')[0].textContent = data;
 		}
 	});
 }

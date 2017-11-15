@@ -3,7 +3,7 @@
 <div class="table-responsive">
 	<table class="vertical_align">
 	<?foreach($arResult["ITEMS"] as $item):?>
-		<tr>
+		<tr data-wishlist-id="<?=$item['ID']?>">
 			<td>
 				<div class="basket_table_picture">
 					<img src="<?=$item['DETAIL_PICTURE']?>" alt="img"/>
@@ -21,10 +21,29 @@
 				<?=$item['PRICE_ARR']['PRICE']?> руб.
 			</td>
 			<td>
-				<a class="fz_22" title="Удалить" href="#"><i class="icon icon-trash"></i></a>
+				<a class="fz_22" title="Удалить" href="javascript:void(0)"><i class="icon icon-trash"></i></a>
 				<a class="fz_22" title="В корзину" href="#"><i class="icon icon-basket"></i></a>
 			</td>
 		</tr>
 	<?endforeach;?>
 	</table>
 </div>
+<?
+	$itemsForJs = array();
+	$imgSrcArr = array();
+	
+	foreach($arResult["ITEMS"] as $item){
+
+		$itemsForJs[$item['ID']] = array(
+			"PRODUCT_ID" => $item['ID'],
+			"PRICE" => $item['PRICE_ARR']['PRICE'],
+			"CURRENCY" => "RUB",
+			"LID" => "s1",
+			"NAME" => $item['NAME'],
+		);
+	}
+?>
+<script>
+	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
+	var userId = <?=$USER->GetId()?>;
+</script>

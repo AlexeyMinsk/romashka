@@ -18,13 +18,12 @@ function startScript(){
 	let illustrationOrder = document.getElementsByName('illustration-order')[0];
 	let miniBasketasketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
 	
-	
 	const CARGO_LIMIT = 1000;
 	const CARGO_PRICE = 300;
 	
-	changeSumResult();
-	changeitemQuantity();
-	
+	//changeSumResult();
+	//changeitemQuantity();
+
 	for(let i = 0; i < counterArr.length; i++){
 		
 		counterArr[i].value = items[i]["QUANTITY"];

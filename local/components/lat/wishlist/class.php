@@ -20,9 +20,18 @@
 			//обработка ошибок
 			}
 			$wishlist = $this->getUserWishlist($this->arParams['userId']);
-			//$context->arResult["ITEMS"] = $wishlist["ITEMS"];
-			//$context->arResult["iBlockId"] = $wishlist["iBlockId"];
-			$context->arResult["ITEMS"] = $this->getItems($wishlist["iBlockId"], $wishlist["ITEMS"]);
+
+			if($context->validateWishlistParams($wishlist))
+				$context->arResult["ITEMS"] = $this->getItems($wishlist["iBlockId"], $wishlist["ITEMS"]);
+			else
+				$context->arResult["ITEMS"] = array();
+		}
+		
+		private function validateWishlistParams($wishlist){
+			
+			if(isset($wishlist) && isset($wishlist["iBlockId"]) && count($wishlist["ITEMS"]))
+				return true;
+			return false;
 		}
 		
 		private function getUserWishlist($userId){
@@ -42,6 +51,7 @@
 			);
 			$iBlockId = $rsUsers->arUserFields['UF_WISH_LIST']['SETTINGS']['IBLOCK_ID'];
 			if($userFields = $rsUsers->fetch()){
+
 				return array_merge(
 					array(
 						"ITEMS" => $userFields['UF_WISH_LIST']
@@ -58,7 +68,7 @@
 			$filter = array(
 				"ID" => $itemsId,
 				"IBLOCK_ID" => $iBlockId,
-				"ACTIVE " => "Y"
+				"ACTIVE" => "Y"
 			);
 			$select = array(
 				"DETAIL_PICTURE",
