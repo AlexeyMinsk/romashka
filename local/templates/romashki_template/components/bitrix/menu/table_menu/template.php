@@ -2,7 +2,7 @@
 <?php
 
 $GLOBALS['APPLICATION']->RestartBuffer();
-echo "<pre>".print_r($arResult["SECTION"], true)."</pre>";
+echo "<pre>".print_r($arResult["MENU"], true)."</pre>";
 die();
 
 ?>
@@ -12,36 +12,32 @@ die();
 			<div class="col-xs-12">
 				<nav class="menu_table pushy pushy-left">
 					<ul class="menu_table__list">
-						<?foreach($arResult as $menuItem):?>
+						
+						<?foreach($arResult["MENU"][1] as $parentLevel):?>
 						<li class="menu_table__item">
-							<a href="<?=$menuItem['LINK']?>"><?=str_replace(" ", "<br>", $menuItem['TEXT']);?></a>
+							<a href="<?=$parentLevel['SECTION_PAGE_URL']?>"><?=$parentLevel["NAME"]?></a>
 							<ul class="menu_table__list-2">
-							
-							<?foreach($menuItem['ADDITIONAL_LINKS'] as $childKey => $firstChild):?>
-							<li class="menu_table__item-2"><a href="<?=$firstChild['href']?>"><?=$childKey?>
-									<?if(is_array($firstChild)):?>
-								</a>
-								<ul class="menu_table__list-3">
-									<?foreach($firstChild as $key => $child):?>
-									<?if($key !== "href"):?>
-									<li class="menu_table__item-2">
-										<a href="<?=$child?>"><?=$key?></a>
+								<?foreach($parentLevel['CHILD'] as $level2):?>
+								<li class="menu_table__item-2">
+									<a href="<?=$level2["DETAIL_PAGE_URL"]?>"><?=$level2["NAME"]?></a>
+									<?if(count($level2['CHILD'])):?>
+									<li class="menu_table__item-2"><a href="javascript:void(0)"><??></a>
+										<ul class="menu_table__list-3">
+											<?foreach($level2['CHILD'] as $level3):?>
+											<li class="menu_table__item-2"><a href="javascript:void(0)"><??></a></li>
+											<?endforeach;?>
+										</ul>
 									</li>
-									<?endif?>
-									<?endforeach?>
-								</ul>
-								<?else:?>
-								</a>
-								<?endif?>
-							</li>
-							<?endforeach?>
-						</ul>
-					</li>
-					<?endforeach?>	
-				</ul>
-			</nav>
-			<div class="site-overlay"></div>
+									<?endif;?>
+								</li>
+								<?endforeach;?>	
+							</ul>
+						</li>
+						<?endforeach;?>
+					</ul>
+				</nav>
+				<div class="site-overlay"></div>
+			</div>
 		</div>
 	</div>
-</div>
-</div>   	
+</div>   																	
