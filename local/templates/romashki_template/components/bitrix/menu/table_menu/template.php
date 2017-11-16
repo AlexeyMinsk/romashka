@@ -1,11 +1,5 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<?php
 
-$GLOBALS['APPLICATION']->RestartBuffer();
-echo "<pre>".print_r($arResult["MENU"], true)."</pre>";
-die();
-
-?>
 <div class="bg_menu container-fluid">
 	<div class="container">
 		<div class="row">
@@ -13,7 +7,7 @@ die();
 				<nav class="menu_table pushy pushy-left">
 					<ul class="menu_table__list">
 						
-						<?foreach($arResult["MENU"][1] as $parentLevel):?>
+						<?foreach($arResult["MENU"] as $parentLevel):?>
 						<li class="menu_table__item">
 							<a href="<?=$parentLevel['SECTION_PAGE_URL']?>"><?=$parentLevel["NAME"]?></a>
 							<ul class="menu_table__list-2">
