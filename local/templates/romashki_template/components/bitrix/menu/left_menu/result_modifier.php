@@ -22,7 +22,7 @@
 		
 		//$item['DETAIL_PICTURE'] = CFile::GetPath($item['DETAIL_PICTURE']);
 		//$item['PRICE_ARR'] = CPrice::GetBasePrice($item['ID']);
-		$item['DETAIL_URL'] = menuItement($item['DETAIL_PAGE_URL'], $item['IBLOCK_SECTION_ID'], $item['ID']);
+		$item['DETAIL_URL'] = replaseUrlElement($item['DETAIL_PAGE_URL'], $item['IBLOCK_SECTION_ID'], $item['ID']);
 		$items[] = $item;	
 	}
 	unset($DBres);
@@ -32,12 +32,12 @@
 		$sections[] = $item;	
 	}
 	unset($DBres);
-	filterParams($sections);
-	$arResult['MENU'] = buildLeftMenu($sections, 1, $items);
-	addElementsLeftMenu($arResult['MENU'], $items);
+	filterSectionParams($sections);
+	$arResult['MENU'] = buildStruct($sections, 1, $items);
+	addElements($arResult['MENU'], $items);
 	
 	
-	function buildLeftMenu($sections, $level_depth, $items, $structMenu = array()){//построение структуры
+	function buildStruct($sections, $level_depth, $items, $structMenu = array()){//построение структуры
 		
 		if($level_depth == 4) return $structMenu;
 		
@@ -46,15 +46,15 @@
 			if($menuItem['DEPTH_LEVEL'] ==  $level_depth){
 				if(empty($structMenu[$Id]))
 				$structMenu[$Id] = $menuItem;
-				$structMenu[$Id]['CHILD'] = getChildArray($sections, $Id);
+				$structMenu[$Id]['CHILD'] = getChildArr($sections, $Id);
 				if(count($structMenu[$Id]['CHILD']))
-				$structMenu[$Id]['CHILD'] = buildLeftMenu($sections, $level_depth+1, $items, $structMenu[$Id]['CHILD']);
+				$structMenu[$Id]['CHILD'] = buildStruct($sections, $level_depth+1, $items, $structMenu[$Id]['CHILD']);
 			}
 		}
 		return $structMenu;
 	}
 	
-	function filterParams(&$sections){
+	function filterSectionParams(&$sections){
 		
 		foreach($sections as &$item){
 			
@@ -66,7 +66,7 @@
 			"IBLOCK_SECTION_ID" => $item['IBLOCK_SECTION_ID'],
 			"SORT" => $item['SORT'],
 			"DEPTH_LEVEL" => $item['DEPTH_LEVEL'],
-			"DETAIL_URL" => menuItemion($item['SECTION_PAGE_URL'], $item['ID']),
+			"DETAIL_URL" => replaseUrlSection($item['SECTION_PAGE_URL'], $item['ID']),
 			"CHILD" => array(),
 			);
 			$item = $newSectArr[$item['ID']];
@@ -74,7 +74,7 @@
 	}
 	
 	
-	function getChildArray($sections, $ID){
+	function getChildArr($sections, $ID){
 		
 		$tmpArr = array();
 		
@@ -86,7 +86,7 @@
 		return $tmpArr;
 	}
 	
-	function addElementsLeftMenu(array &$arr, $items){
+	function addElements(array &$arr, $items){
 		
 		foreach($arr as &$menuList){
 			
@@ -102,12 +102,12 @@
 				}
 			}
 			if($flag){
-				addElementsLeftMenu($menuList["CHILD"], $items);
+				addElements($menuList["CHILD"], $items);
 			}
 		}
 	}
 	
-	function menuItement($templateUrl, $sectionId, $id){
+	function replaseUrlElement($templateUrl, $sectionId, $id){
 		
 		//$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
 		//return str_replace('#ELEMENT_ID#', $id, $templateUrl);
@@ -116,7 +116,7 @@
 		return $match[0].$sectionId."/".$id."/";
 	}
 	
-	function menuItemion($templateUrl, $sectionId){
+	function replaseUrlSection($templateUrl, $sectionId){
 		
 		//$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
 		//return str_replace('#SECTION_ID#', $sectionId, $templateUrl);
