@@ -8,7 +8,7 @@
 	}
 	
 	$arResult["ITEMS"] = getElement($arResult['SECTION']['ID'], $arResult['SECTION']['IBLOCK_ID']);
-
+	
 	function getElement($sectionId, $iBlockId){
 		
 		$filter = array(
@@ -25,16 +25,22 @@
 		);
 		
 		$DBres = CIBlockElement::GetList(Array("SORT"=>"ASC"), $filter, false, false);
-
+		
 		$items = array();
 		
 		while($item = $DBres->fetch()){
+			$item['DETAIL_URL'] = replaseUrl($item['DETAIL_PAGE_URL'], $sectionId, $item['ID']);
 			$item['DETAIL_PICTURE'] = CFile::GetPath($item['DETAIL_PICTURE']);
 			$item['PRICE_ARR'] = CPrice::GetBasePrice($item['ID']);
 			$items[] = $item;
 		}
-
+		
 		return $items;
 	}
 	
-	
+	function replaseUrl($templateUrl, $sectionId, $id){
+
+		$match = '';
+		preg_match('/\/\w+\//', $templateUrl, $match);
+		return $match[0].$sectionId."/".$id."/";
+	}

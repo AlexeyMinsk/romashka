@@ -18,7 +18,7 @@
 	<div class="col-xs-12 col-mid-xs-6 col-sm-4 ">
 		<div class="card_preview" data-card-id=<?=$item['ID']?>>
 			<div class="card_preview__wrap_hidden">
-				<a class="card_preview__lnk_pic" href="<?=$item['DETAIL_PAGE_URL']?>">
+				<a class="card_preview__lnk_pic" href="<?=$item['DETAIL_URL']?>">
 					<img alt="img" src="<?=$item['DETAIL_PICTURE']?>" class="card_preview__pic" title="img">
 					<?if($key%3 == 0):?>
 					<span class="label_card">
@@ -38,7 +38,7 @@
 						<img alt="img" src="<?=$arResult['RAITING']?>">
 					</div>
 					<div class="card_preview__prod_name">
-						<a class="card_preview__lnk lnk_brd" href="<?=$item['DETAIL_PAGE_URL']?>"
+						<a class="card_preview__lnk lnk_brd" href="<?=$item['DETAIL_URL']?>"
 						title="Нижнее белье Ночь наступает"><?=$item["NAME"]?></a>
 					</div>
 					<div class="card_preview__price">
@@ -53,7 +53,8 @@
 	</div>
 	<?endforeach;?>
 	<?else:?>
-	<h1>Раздел не содержит активных товаров, выберите другой раздел</h1>
+	<h1>Раздел не содержит активных товаров, выберите другой раздел.
+	<a href="/catalog/" class="link-to-catalog"> Перейти в каталог<a></h1>
 	<?endif;?>
 </section>
 
