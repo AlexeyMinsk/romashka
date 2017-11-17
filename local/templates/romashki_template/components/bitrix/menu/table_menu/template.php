@@ -8,16 +8,17 @@
 					<ul class="menu_table__list">
 						<?foreach($arResult["MENU"] as $parentLevel):?>
 						<li class="menu_table__item">
-							<a href="<?=$parentLevel['SECTION_PAGE_URL']?>"><?=$parentLevel['NAME']?></a>
+							<a href="<?=$parentLevel['DETAIL_URL']?>"><?=$parentLevel['NAME']?></a>
 							<?if(count($parentLevel['CHILD'])):?>
 							<ul class="menu_table__list-2">
 								<?foreach($parentLevel['CHILD'] as $level2):?>
-								<li class="menu_table__item-2"><a href="<?=$parentLevel['NAME']?>">
+								<li class="menu_table__item-2"><a href="<?=$level2['DETAIL_URL']?>">
 								<?=$level2['NAME']?></a>
 								<?if(count($level2['CHILD'])):?>
 									<ul class="menu_table__list-3">
 										<?foreach($level2['CHILD'] as $level3):?>
-										<li class="menu_table__item-2"><a href="#"><?=$level3['NAME']?></a></li>
+										<li class="menu_table__item-2"><a href="<?=$level3['DETAIL_URL']?>">
+											<?=$level3['NAME']?></a></li>
 										<?endforeach;?>
 									</ul>
 									<?endif;?>

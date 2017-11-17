@@ -22,6 +22,7 @@
 		
 		$item['DETAIL_PICTURE'] = CFile::GetPath($item['DETAIL_PICTURE']);
 		$item['PRICE_ARR'] = CPrice::GetBasePrice($item['ID']);
+		$item['DETAIL_URL'] = replaseUrlElement($item['DETAIL_PAGE_URL'], $item['ID']);
 		$items[] = $item;	
 	}
 	unset($DBres);
@@ -65,7 +66,7 @@
 			"IBLOCK_SECTION_ID" => $item['IBLOCK_SECTION_ID'],
 			"SORT" => $item['SORT'],
 			"DEPTH_LEVEL" => $item['DEPTH_LEVEL'],
-			"SECTION_PAGE_URL" => $item['SECTION_PAGE_URL'],
+			"DETAIL_URL" => replaseUrlSection($item['SECTION_PAGE_URL'], $item['ID']),
 			"CHILD" => array(),
 			);
 			$item = $newSectArr[$item['ID']];
@@ -84,20 +85,6 @@
 
 		return $tmpArr;
 	}
-	
-/*
-		function getItemsArr($elements, $ID){
-		
-		$tmpArr = array();
-		
-		foreach($elements as $item){
-			if($item['IBLOCK_SECTION_ID'] == $ID)
-			$tmpArr[$item['NAME']] = $item;
-		}
-		
-		return $tmpArr;
-	}
-*/	
 	
 	function addElements(array &$arr, $items){
 		
@@ -118,4 +105,16 @@
 				addElements($menuList["CHILD"], $items);
 			}
 		}
-	}				
+	}
+	
+	function replaseUrlElement($templateUrl, $id){
+		
+		$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
+		return str_replace('#ELEMENT_ID#', $id, $templateUrl);
+	}
+	
+	function replaseUrlSection($templateUrl, $sectionId){
+		
+		$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
+		return str_replace('#SECTION_ID#', $sectionId, $templateUrl);
+	}
