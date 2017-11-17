@@ -24,6 +24,12 @@ $arUrlRewrite = array(
 		"ID" => "bitrix:stssync.server",
 		"PATH" => "/bitrix/services/stssync/calendar/index.php",
 	),
+	array(
+		"CONDITION" => "#^/catalog/#",
+		"RULE" => "",
+		"ID" => "bitrix:catalog",
+		"PATH" => "/catalog/index.php",
+	),
 );
 
 ?>
