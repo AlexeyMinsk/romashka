@@ -33,6 +33,8 @@
 	unset($DBres);
 	filterSectionParams($sections);
 	$arResult['MENU'] = buildStruct($sections, 1, $items);
+	addElements($arResult['MENU'], $items);
+	
 	
 	function buildStruct($sections, $level_depth, $items, $structMenu = array()){//построение структуры
 		
@@ -41,15 +43,14 @@
 		foreach($sections as $menuItem){
 			$Id = $menuItem['ID'];
 			if($menuItem['DEPTH_LEVEL'] ==  $level_depth){
-				if(empty($structMenu[$Id] ))
-					$structMenu[$Id] = $menuItem;
+				if(empty($structMenu[$Id]))
+				$structMenu[$Id] = $menuItem;
 				$structMenu[$Id]['CHILD'] = getChildArr($sections, $Id);
-				$structMenu[$Id]['ELEMENTS'] = getItemsArr($items, $Id);
 				if(count($structMenu[$Id]['CHILD']))
-					$structMenu[$Id]['CHILD'] = buildStruct($sections, $level_depth+1, $items, $structMenu[$Id]['CHILD']);
+				$structMenu[$Id]['CHILD'] = buildStruct($sections, $level_depth+1, $items, $structMenu[$Id]['CHILD']);
 			}
 		}
-		return $structMenu;//buildStruct($sections, $level_depth+1, $items, $structMenu);
+		return $structMenu;
 	}
 	
 	function filterSectionParams(&$sections){
@@ -65,7 +66,7 @@
 			"SORT" => $item['SORT'],
 			"DEPTH_LEVEL" => $item['DEPTH_LEVEL'],
 			"SECTION_PAGE_URL" => $item['SECTION_PAGE_URL'],
-			"CHILD" => array()
+			"CHILD" => array(),
 			);
 			$item = $newSectArr[$item['ID']];
 		}
@@ -80,11 +81,12 @@
 			if($item['IBLOCK_SECTION_ID'] == $ID)
 			$tmpArr[$item['ID']] = $item;
 		}
-		
+
 		return $tmpArr;
 	}
 	
-	function getItemsArr($elements, $ID){
+/*
+		function getItemsArr($elements, $ID){
 		
 		$tmpArr = array();
 		
@@ -94,26 +96,26 @@
 		}
 		
 		return $tmpArr;
-	}	
+	}
+*/	
 	
-	/*
-		function buildStruct($sections, $level_depth, $items, $structMenu = array()){//построение структуры
+	function addElements(array &$arr, $items){
 		
-		foreach($sections as $menuItem){
-		if($menuItem['DEPTH_LEVEL'] == $level_depth){
-		if($level_depth == 1){
-		$structMenu[$menuItem['ID']] = $menuItem;
-		$structMenu[$menuItem['ID']]['ELEMENTS'] = getItemsArr($items, $menuItem['ID']);
+		foreach($arr as &$menuList){
+			
+			$flag = false;
+			
+			if(isset($menuList["CHILD"]) && count($menuList["CHILD"])){
+				$flag = true;
+			}
+			
+			foreach($items as $item){
+				if($item['IBLOCK_SECTION_ID'] == $menuList['ID']){
+					$menuList["CHILD"][$item['NAME']] = $item;
+				}
+			}
+			if($flag){
+				addElements($menuList["CHILD"], $items);
+			}
 		}
-		else{
-		$structMenu[$menuItem['IBLOCK_SECTION_ID']]['CHILD'] = 
-		getChildArr($sections, $menuItem['IBLOCK_SECTION_ID'], $level_depth);
-		}
-		}
-		}
-		
-		if( count($structMenu[$level_depth]) )
-		return buildStruct($sections, $level_depth+1, $items, $structMenu);
-		else
-		return $structMenu;
-	}*/																	
+	}				
