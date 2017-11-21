@@ -84,14 +84,14 @@ let elementsCollection = {
 
 
 document.addEventListener("addWish", function(event){
-
+	
 	let inWish = document.getElementById("in_wish");
 	let popupImg = inWish.getElementsByClassName("in-wish-popup-img")[0];
 	let popupName = inWish.getElementsByClassName("in-wish-popup-text")[0];
-
+	
 	popupImg.src = event.detail.src;
 	popupName.textContent = event.detail.name;
-	});
+});
 
 function startScript(){
 	
@@ -119,7 +119,7 @@ function refreshMiniBasket(){//обновить конзину при загрузке страницы
 
 function refreshWishlist(){
 	
-		BX.ajax({
+	BX.ajax({
 		method: 'POST',
 		dataType: 'json',
 		url: '/ajax/add-wish.php',
@@ -152,18 +152,19 @@ function setMiniBasketData(event){//при изменении корзины
 		}
 	}
 	
-	function timeShift(elementsCollection, objVal){//ожидать загрузки документа для обновления мини корзины
+	function timeShift(elementsCollection, detail){//ожидать загрузки документа для обновления мини корзины
 		
 		setTimeout(documentReady, 100);
 		
 		function documentReady(){
 			
 			if(document.readyState == 'interactive' || document.readyState == 'complete'){
-				if(objVal.quantity)
-				elementsCollection.miniBasket.textContent =  '(' + objVal.quantity + ')';
+				if(detail.quantity)
+					elementsCollection.miniBasket.textContent =  '(' + detail.quantity + ')';
 				else
-				elementsCollection.basketSum.textContent = objVal.sum;
-				}else{
+					elementsCollection.basketSum.textContent = detail.sum;
+			}
+			else{
 				setTimeout(documentReady, 100);
 			}
 		}

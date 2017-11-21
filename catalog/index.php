@@ -1,7 +1,11 @@
 <?
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	$APPLICATION->SetTitle("Каталог");
-	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js", "/js/vendor/spritespin.min.js"));
+	$scriptsArr = array_merge($scriptsArr, array(
+	"/js/vendor/tab.min.js", 
+	"/js/vendor/spritespin.min.js",
+	"/js/vendor/menu_collapse.min.js"
+	));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
 	"/include/card_in_basket.php",
 	"/include/in_wish.php",
@@ -10,8 +14,6 @@
 	));
 ?>	
 <main>
-	
-	
 	<?$APPLICATION->IncludeComponent(
 		"bitrix:catalog", 
 		"romashka_catalog", 

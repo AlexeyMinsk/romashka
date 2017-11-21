@@ -11,14 +11,14 @@
 			</a>
 			<ul class="aside_menu-2__list-2">
 				<?foreach($parentList['CHILD'] as $firstChild):?>
-				<li><a href="<?=$firstChild['DETAIL_URL']?>"><?=$firstChild['NAME']?>
+				<li><a href="#"><?=$firstChild['NAME']?>
 					<?if(count($firstChild['CHILD'])):?>
 						<i class="icon_menu__caret"></i>
 					</a>
 				<ul class="aside_menu-2__list-3">
 					<?foreach($firstChild['CHILD'] as $child):?>
 					<li>
-						<a href="<?=$child['DETAIL_URL']?>"><?=$child['NAME']?></a>
+						<a href="#"><?=$child['NAME']?></a>
 					</li>
 					<?endforeach?>
 				</ul>

@@ -11,7 +11,6 @@
 	"/include/popup-rduction.php"
 	));
 ?>
-
 <section class="row__inline-blocks mt_3">
 	<?if(count($arResult['ITEMS'])):?>
 	<?foreach($arResult['ITEMS'] as $key => $item):?>
@@ -57,7 +56,6 @@
 	<a href="/catalog/" class="link-to-catalog"> Перейти в каталог<a></h1>
 	<?endif;?>
 </section>
-
 <?
 	$itemsForJs = array();
 	$imgSrcArr = array();

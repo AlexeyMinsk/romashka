@@ -29,7 +29,7 @@
 		$items = array();
 		
 		while($item = $DBres->fetch()){
-			$item['DETAIL_URL'] = 'javascript:void(0)';//replaseUrl($item['DETAIL_PAGE_URL'], $sectionId, $item['ID']);
+			$item['DETAIL_URL'] = replaseUrl($item['DETAIL_PAGE_URL'], $sectionId, $item['ID']);
 			$item['DETAIL_PICTURE'] = CFile::GetPath($item['DETAIL_PICTURE']);
 			$item['PRICE_ARR'] = CPrice::GetBasePrice($item['ID']);
 			$items[] = $item;

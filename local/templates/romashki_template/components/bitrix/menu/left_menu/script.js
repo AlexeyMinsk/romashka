@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', pageLoadFn);
 
 function pageLoadFn(){
 	
-	let icons = document.getElementsByClassName('icon_menu__caret');
+	let menuList = document.querySelectorAll('.aside_menu-2__list>li a');
 	
-	for(let i = 0; i < icons.length; i++){
+	for(let i = 0; i < menuList.length; i++){
 
-		icons[i].addEventListener('click', event => {
-			//console.log('click');
-			//return false;
+		menuList[i].addEventListener('click', event => {
+			if(event.target.tagName == 'I')
+				event.preventDefault();
 		});
 	}
-}
+} 
