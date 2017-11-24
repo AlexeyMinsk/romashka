@@ -75,20 +75,23 @@
 				<a href="#" class="label_filter">Одноголовая хризантема</a>
 				<a href="#" class="label_filter active">Одноголовая хризантема</a>
 				<section class="row__inline-blocks mt_3">
-					<?foreach($arResult['ITEMS'] as $key => $item){
-						if(isset($item['DETAIL_PICTURE']) && is_array($item['DETAIL_PICTURE']) )
-						$DETAIL_PICTURE = $item['DETAIL_PICTURE'];
-						if(isset($item['PREVIEW_PICTURE']) && is_array($item['PREVIEW_PICTURE']) )
-						$PREVIEW_PICTURE = $item['PREVIEW_PICTURE'];
+					<?foreach($arResult['NAV_RESULT']->arResult as $key => $item){
+
+						if(isset($item['DETAIL_PICTURE']))
+							$DETAIL_PICTURE = CFile::GetPath($item['DETAIL_PICTURE']);
+						if(isset($item['PREVIEW_PICTURE']))
+							$PREVIEW_PICTURE = CFile::GetPath($item['PREVIEW_PICTURE']);
+						
 						$PICTURE = $PREVIEW_PICTURE ? $PREVIEW_PICTURE : $DETAIL_PICTURE;
+
 						if(empty($PICTURE))
-						$PICTURE = array('SRC' => '/img/no-foto.jpg');	
+							$PICTURE = '/img/no-foto.jpg';	
 					?>
 					<div class="col-xs-12 col-mid-xs-6 col-sm-4 ">
 						<div class="card_preview" data-card-id=<?=$item['ID']?>>
 							<div class="card_preview__wrap_hidden">
 								<a class="card_preview__lnk_pic" href="<?=$item['DETAIL_PAGE_URL']?>">
-									<img alt="img" src="<?=$PICTURE['SRC']?>" class="card_preview__pic" title="img">
+									<img alt="img" src="<?=$PICTURE?>" class="card_preview__pic" title="img">
 									<?if($key%3 == 0):?>
 									<span class="label_card">
 										<span class="label_info _new">
@@ -111,8 +114,8 @@
 										title="Нижнее белье Ночь наступает"><?=$item["NAME"]?></a>
 									</div>
 									<div class="card_preview__price">
-										<?=$item['ITEM_PRICES'][0]['RATIO_PRICE'].' руб.'?>
-										<span class="card_preview__price_old"><?=$item['ITEM_PRICES'][0]['BASE_PRICE'].' руб.'?></span>
+										<?=$item['CATALOG_PURCHASING_PRICE'].' руб.'?>
+										<span class="card_preview__price_old"><?=$item['CATALOG_PURCHASING_PRICE'].' руб.'?></span>
 									</div>
 									<a href="#in_wish" class="wish open-popup-inline" data-effect="mfp-zoom-in"><i class="icon i_star"></i>Добавить в избранное</a>
 								</div>
@@ -125,23 +128,33 @@
 			</div>
 			<div class="text_center">
 				<nav>
+				<?if($arResult['NAV_RESULT']->NavPageCount > 0)://для теста 0
+					$previus = $arResult['NAV_RESULT']->NavPageNomer - 1;
+					$previus = $previus < 1 ? 1 : $previus;
+					$next = $arResult['NAV_RESULT']->NavPageNomer + 1;
+					$next = $next > $arResult['NAV_RESULT']->NavPageCount ?
+						$arResult['NAV_RESULT']->NavPageCount : $next;
+				?>
 					<ul class="pagination">
 						<li>
-							<a href="#" aria-label="Previous">
+							<a href="/catalog/?PAGEN_1=<?=$previus?>" aria-label="Previous">
 								<span aria-hidden="true">«</span>
 							</a>
 						</li>
-						<li><a href="#">1</a></li>
-						<li class="active"><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
+						<?for($i = 1; $i <= $arResult['NAV_RESULT']->NavPageCount; $i++):
+							if($arResult['NAV_RESULT']->NavPageNomer == $i):?>
+								<li class="active"><a href="/catalog/?PAGEN_1=<?=$i?>"><?=$i?></a></li>
+							<?else:?>
+								<li><a href="/catalog/?PAGEN_1=<?=$i?>"><?=$i?></a></li>
+							<?endif;
+						endfor;?>
 						<li>
-							<a href="#" aria-label="Next">
+							<a href="/catalog/?PAGEN_1=<?=$next?>" aria-label="Next">
 								<span aria-hidden="true">»</span>
 							</a>
 						</li>
 					</ul>
+					<?endif;?>
 				</nav>
 			</div>
 		</div> 
@@ -154,32 +167,30 @@
 						Букеты с хризантемой
 					</div>
 				</div>
+				
 				<div class="row__inline-blocks">
 					<?
-						$items = array(
-						array(
-						"IMG_SRC" => SITE_DIR."img/cat-2.jpg",
-						"RATING" => SITE_DIR.'img/raiting.png'
-						),
-						array(
-						"IMG_SRC" => SITE_DIR."img/cat-5.jpg",
-						"RATING" => SITE_DIR.'img/raiting.png'
-						),
-						array(
-						"IMG_SRC" => SITE_DIR."img/cat-3.jpg",
-						"RATING" => SITE_DIR.'img/raiting.png'
-						),
-						array(
-						"IMG_SRC" => SITE_DIR."img/cat-2.jpg",
-						"RATING" => SITE_DIR.'img/raiting.png'
-						),
-						);
-						foreach($items as $item){?>
+						foreach($arResult['ITEMS'] as $key => $item):
+						
+							if($key == 4)
+								break;
+							
+							if(isset($item['DETAIL_PICTURE']) && is_array($item['DETAIL_PICTURE']) )
+								$DETAIL_PICTURE = $item['DETAIL_PICTURE'];
+							
+							if(isset($item['PREVIEW_PICTURE']) && is_array($item['PREVIEW_PICTURE']) )
+								$PREVIEW_PICTURE = $item['PREVIEW_PICTURE'];
+							
+							$PICTURE = $PREVIEW_PICTURE ? $PREVIEW_PICTURE : $DETAIL_PICTURE;
+							
+							if(empty($PICTURE))
+								$PICTURE = array('SRC' => '/img/no-foto.jpg');	
+						?>
 						<div class="col-xs-12 col-mid-xs-6 col-sm-4 col-md-3">
 							<div class="card_preview">
 								<div class="card_preview__wrap_hidden">
 									<a class="card_preview__lnk_pic" href="#">
-										<img alt="img" src="<?=$item['IMG_SRC']?>" class="card_preview__pic" title="img">
+										<img alt="img" src="<?=$PICTURE['SRC']?>" class="card_preview__pic" title="img">
 										<span class="label_card">
 											<span class="label_info _new">
 											</span> <br>
@@ -193,14 +204,16 @@
 									</a>
 									<div class="card_preview__info ">
 										<div class="raiting text_center">
-											<img alt="img" src="<?=$item["RATING"]?>">
+											<img alt="img" src="<?=$arResult['RAITING']?>">
 										</div>
 										<div class="card_preview__prod_name">
-											<a class="card_preview__lnk lnk_brd" href="#" title="Нижнее белье Ночь наступает">Односторонний букет</a>
+											<a class="card_preview__lnk lnk_brd" href="#" title="Нижнее белье Ночь наступает"><?=$item["NAME"]?></a>
 										</div>
 										<div class="card_preview__price">
-											45 568 450 руб.
-											<span class="card_preview__price_old">86 454 000 руб.</span>
+											<?=$item['CATALOG_PURCHASING_PRICE']?> руб.
+											<span class="card_preview__price_old">
+												<?=$item['CATALOG_PURCHASING_PRICE']?> руб.
+												</span>
 										</div>
 										<a href="#in_wish" class="wish open-popup-inline" data-effect="mfp-zoom-in"><i class="icon i_star"></i>Добавить в избранное</a>
 									</div>
@@ -208,7 +221,7 @@
 								</div>
 							</div>
 						</div>
-					<?}?>
+					<?endforeach;?>
 				</div>
 				
 				<p>

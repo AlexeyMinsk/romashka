@@ -1,4 +1,5 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
+
 <div class="basket_tabs">
 	<!-- Nav tabs -->
 	<ul class="basket_tabs__navigation" role="tablist">
@@ -153,7 +154,7 @@
 							</td>
 							<td>
 								<a class="mt_1 i_block" href="#"> <strong><?=$item["NAME"]?></strong></a> <br/>
-							</td>
+								</td>
 							<td class="text_center" data-counter-td="<?=$item['ID']?>"><?=$item['QUANTITY']?></td>
 							<td data-sum-td="<?=$item['ID']?>"><?=str_replace(" ", "", $item["SUM"])?></td>
 						</tr>
@@ -189,10 +190,9 @@
 	foreach($arResult["ITEMS"]["AnDelCanBuy"] as $item){
 		
 		$itemsForJs[] = array(
-		"QUANTITY" => $item['QUANTITY'],
+			"QUANTITY" => $item['QUANTITY'],
 		);
 	}
-	
 ?>
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;

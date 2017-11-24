@@ -10,17 +10,37 @@ function startScript(){
 	let inWish = document.querySelectorAll('[href="#in_wish"]');
 	let whishlist = document.getElementsByClassName('counter-whishlist')[0];
 	let buyOneClick = document.querySelectorAll('[href="#popup-click"]');
-
+	let minus = document.getElementsByClassName('counter__minus')[0];
+	let plus = document.getElementsByClassName('counter__plus')[0];
+	let counter = document.getElementsByClassName('counter__inp')[0];
+	
+	counter.value = 1;
+	
+	plus.addEventListener("click", function(event){
+		
+		counter.value = +counter.value + 1;
+	});
+	
+	minus.addEventListener("click", function(event){
+		
+		counter.value = +counter.value - 1 < 1 ? 1 : +counter.value - 1;
+	});
+	
+	counter.addEventListener('keydown', event => {
+		if(!+event.key)
+			event.preventDefault();
+	});
+	
 	for(let i = 0; i < inBasket.length; i++)	
-		inBasket[i].addEventListener('click', clickBuyFn);
+	inBasket[i].addEventListener('click', clickBuyFn);
 	
 	for(let i = 0; i < inWish.length; i++)	
-		inWish[i].addEventListener('click', addWhishListFn);
+	inWish[i].addEventListener('click', addWhishListFn);
 	
 	document.addEventListener('click', buyOneClickFn);
 	
 	document.addEventListener("addWish", function(event){
-
+		
 		BX.ajax({
 			method: 'POST',
 			dataType: 'json',
@@ -37,9 +57,9 @@ function startScript(){
 	
 		event.preventDefault();
 	});
-
-	function clickBuyFn(event){
 	
+	function clickBuyFn(event){
+		
 		let id = event.target.closest('[data-card-id]').dataset.cardId;
 		let myEvent = new CustomEvent('clickBuy', {
 			detail:{
@@ -54,7 +74,7 @@ function startScript(){
 	}
 	
 	function addWhishListFn(event){
-
+		
 		let id = event.target.closest('[data-card-id]').dataset.cardId;
 		let myEvent = new CustomEvent('addWish', {
 			detail:{
@@ -80,6 +100,8 @@ function startScript(){
 	}
 	
 	function sendToBasket(id){
+	
+		item["QUANTITY"] = counter.value;
 		
 		BX.ajax({
 			method: 'POST',

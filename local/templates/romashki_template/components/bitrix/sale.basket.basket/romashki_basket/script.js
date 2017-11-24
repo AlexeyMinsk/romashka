@@ -39,6 +39,7 @@ function startScript(){
 			sendAjax(getParentDataset(counter, "[data-elem-id]", "elemId"), counter.value);
 			return false;
 		});
+		
 		minusArr[i].addEventListener("click", function(event){
 			
 			let counter = this.closest('.counter').getElementsByClassName('counter__inp')[0];
@@ -49,11 +50,18 @@ function startScript(){
 			sendAjax(getParentDataset(counter, "[data-elem-id]", "elemId"), counter.value);
 			return false;
 		});
+		
+		counterArr[i].addEventListener("keydown", function(event){
+			if(!+event.key)
+				event.preventDefault();
+		});
+		
 		delayButtonArr[i].addEventListener("click", function(event){
 			
 			sendAjax(getParentDataset(this, "[data-elem-id]", "elemId"), "DELAY");
 			return false;
 		});
+		
 		deleteButtonArr[i].addEventListener("click", deleteBasketElem);
 		deleteXArr[i].addEventListener("click", deleteBasketElem);
 		
