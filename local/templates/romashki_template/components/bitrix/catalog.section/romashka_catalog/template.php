@@ -71,21 +71,22 @@
 						<div class="clear"></div>
 					</form>
 				</div>
-				<a href="#" class="label_filter ">Кустовая хризантема</a>
-				<a href="#" class="label_filter">Одноголовая хризантема</a>
-				<a href="#" class="label_filter active">Одноголовая хризантема</a>
+				<a href="javascript:void(0)" class="label_filter ">Кустовая хризантема</a>
+				<a href="javascript:void(0)" class="label_filter">Одноголовая хризантема</a>
+				<a href="javascript:void(0)" class="label_filter active">Одноголовая хризантема</a>
 				<section class="row__inline-blocks mt_3">
-					<?foreach($arResult['NAV_RESULT']->arResult as $key => $item){
+					<?foreach($arResult['ITEMS'] as $key => $item){
 
-						if(isset($item['DETAIL_PICTURE']))
-							$DETAIL_PICTURE = CFile::GetPath($item['DETAIL_PICTURE']);
-						if(isset($item['PREVIEW_PICTURE']))
-							$PREVIEW_PICTURE = CFile::GetPath($item['PREVIEW_PICTURE']);
-						
-						$PICTURE = $PREVIEW_PICTURE ? $PREVIEW_PICTURE : $DETAIL_PICTURE;
-
-						if(empty($PICTURE))
-							$PICTURE = '/img/no-foto.jpg';	
+						if(isset($item['DETAIL_PICTURE']) && is_array($item['DETAIL_PICTURE']) )
+								$DETAIL_PICTURE = $item['DETAIL_PICTURE']['SRC'];
+							
+							if(isset($item['PREVIEW_PICTURE']) && is_array($item['PREVIEW_PICTURE']) )
+								$PREVIEW_PICTURE = $item['PREVIEW_PICTURE']['SRC'];
+							
+							$PICTURE = $PREVIEW_PICTURE ? $PREVIEW_PICTURE : $DETAIL_PICTURE;
+							
+							if(empty($PICTURE))
+								$PICTURE = array('SRC' => '/img/no-foto.jpg');	
 					?>
 					<div class="col-xs-12 col-mid-xs-6 col-sm-4 ">
 						<div class="card_preview" data-card-id=<?=$item['ID']?>>

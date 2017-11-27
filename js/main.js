@@ -65,7 +65,7 @@
 	};
 }();
 
-document.addEventListener('DOMContentLoaded', startScript);
+document.addEventListener("DOMContentLoaded", startScript);
 document.addEventListener("changeInBasket", setMiniBasketData);
 document.addEventListener("clickBuy", function(event){
 	
@@ -97,6 +97,31 @@ function startScript(){
 	
 	elementsCollection.miniBasket = document.getElementsByClassName('basket-quantity')[0];
 	elementsCollection.basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
+	
+	document.forms.registration.addEventListener('submit', function(event){
+		
+		let formData = new FormData(this);
+		let xhr = new XMLHttpRequest();
+		
+		xhr.open('POST', '/ajax/reg.php');
+		xhr.send(formData);
+		
+		$.magnificPopup.close();
+		event.preventDefault();
+	});
+	
+	document.forms.auth.addEventListener('submit', function(event){
+		
+		let formData = new FormData(this);
+		let xhr = new XMLHttpRequest();
+		
+		xhr.open('POST', '/ajax/auth.php');
+		xhr.send(formData);
+		
+		$.magnificPopup.close();
+		event.preventDefault();
+	});
+	
 	refreshMiniBasket();
 	refreshWishlist();
 }
@@ -117,7 +142,7 @@ function refreshMiniBasket(){//обновить конзину при загрузке страницы
 	});
 }
 
-function refreshWishlist(){
+function refreshWishlist(){//обновить список желаний при загрузке страницы
 	
 	BX.ajax({
 		method: 'POST',
@@ -160,9 +185,9 @@ function setMiniBasketData(event){//при изменении корзины
 			
 			if(document.readyState == 'interactive' || document.readyState == 'complete'){
 				if(detail.quantity)
-					elementsCollection.miniBasket.textContent =  '(' + detail.quantity + ')';
+				elementsCollection.miniBasket.textContent =  '(' + detail.quantity + ')';
 				else
-					elementsCollection.basketSum.textContent = detail.sum;
+				elementsCollection.basketSum.textContent = detail.sum;
 			}
 			else{
 				setTimeout(documentReady, 100);
@@ -170,3 +195,22 @@ function setMiniBasketData(event){//при изменении корзины
 		}
 	}
 }
+
+function checkUserAuthorized(userId){
+	
+	if(userId === 0){
+	
+		BX.ajax({
+			method: 'POST',
+			dataType: 'json',
+			url: '/ajax/auth.php',
+			data: {
+				'create_user': 'Y'
+			},
+			onsuccess: function (data){
+				userId = data;
+			}
+		});
+	}
+}
+

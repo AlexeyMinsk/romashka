@@ -5,17 +5,17 @@
 		</div>
 	</div>
     <div class="col-xs-offset-1 col-xs-10 popup_wrap">
-        <form class="clearfix" action="">
+        <form name="auth" class="clearfix" action="">
             <div class="form-group">
                 <label for="login">Логин</label>
-                <input type="text" class="form-control" id="login" placeholder="">
+                <input type="text" class="form-control" name="login" required>
 			</div>
             <div class="form-group">
                 <label for="pass">Пароль</label>
-                <input type="text" class="form-control" id="pass" placeholder="">
+                <input type="text" class="form-control" name="pass" required>
 			</div>
 			
-            <input id="check" type="checkbox"/>
+            <input name="check" type="checkbox"/>
             <label class="font_normal" for="check">Запомнить меня на этом компьютере</label>
 			
             <div class= "col-xs-offset-2 col-xs-8 text_center mt_2 mb_2">
@@ -24,7 +24,7 @@
 		</form>
         <div class="text-center">
             <a class="fz_12 open-popup-inline" href="#popup-rduction">Забыли пароль?</a>
-            <a class=" fz_12" href="#">Зарегистрироваться</a>
+            <a class=" fz_12" href="javascript:void(0)">Зарегистрироваться</a>
 		</div>
 	</div>
 </div>

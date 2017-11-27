@@ -13,7 +13,7 @@ function startScript(){
 	for(let i = 0; i < inBasket.length; i++)	
 		inBasket[i].addEventListener('click', clickBuyFn);
 	
-	for(let i = 0; i < inWish.length; i++)	
+	for(let i = 0; i < inWish.length; i++)
 		inWish[i].addEventListener('click', addWhishListFn);
 	
 	document.addEventListener("addWish", function(event){
@@ -51,7 +51,7 @@ function startScript(){
 	}
 	
 	function addWhishListFn(event){
-
+	
 		let id = event.target.closest('[data-card-id]').dataset.cardId;
 		let myEvent = new CustomEvent('addWish', {
 			detail:{

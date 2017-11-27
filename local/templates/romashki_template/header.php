@@ -6,6 +6,11 @@
 	<head>
 		<?
 			$APPLICATION->ShowHead();
+			
+			CUtil::InitJSCore();
+			CJSCore::Init(array("fx"));
+			CJSCore::Init(array('ajax'));
+			//принудительная инициализация BX
 			$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/app.min.css", true);
 		?>
 		<title><?$APPLICATION->ShowTitle()?></title>
@@ -69,7 +74,7 @@
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 col-sm-6 col-md-2 text_right text_center__sm">
 									<a href="/wish/" class="wish"><i class="icon i_star"></i>Избранное 
-										(<span class="counter-whishlist">0</span>)</a>
+									(<span class="counter-whishlist">0</span>)</a>
 								</div>
 								<div class="col-xs-6 col-mid-xs-6 text_center__sm  col-sm-6 col-md-3">
 									<div class="basket">
@@ -98,6 +103,7 @@
 			"/include/popup-registration.php"
 			);
 			$scriptsArr = array(
+			'/js/cookie.js',
 			'/js/vendor/jquery.2.1.4.min.js',
 			'/js/vendor/collapse.min.js',
 			'/js/vendor/dropdown.min.js',
@@ -106,4 +112,4 @@
 			'/js/vendor/transition.min.js',
 			'/js/vendor/owl.carousel.min.js',
 			);
-		?>				
+		?>						

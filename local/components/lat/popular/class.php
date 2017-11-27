@@ -3,27 +3,25 @@
 	
 	class PopularClass extends CBitrixComponent{
 		
-	
 		public function executeComponent(){
 
-			$myComp = new self();
-			$myComp->init($this);
+			$this->init();
 			
 			if($this->StartResultCache()){
 				$this->IncludeComponentTemplate();
 			}
 		}
 		
-		private function init($context){
+		private function init(){
 
 		    if(!Loader::IncludeModule("iblock")){
 			//обработка ошибок
 			}
 
-			if($context->validateParams($context->arParams["IBLOCK_ID"]))
-				$context->arResult["ITEMS"] = $this->getItems($context->arParams["IBLOCK_ID"], $context->arParams["COUNTER"]);
+			if($this->validateParams($this->arParams["IBLOCK_ID"]))
+				$this->arResult["ITEMS"] = $this->getItems($this->arParams["IBLOCK_ID"], $this->arParams["COUNTER"]);
 			else
-				$context->arResult["ITEMS"] = array();
+				$this->arResult["ITEMS"] = array();
 		}
 		
 		private function validateParams($param1){
@@ -41,7 +39,6 @@
 			);
 			$select = array(
 				"DETAIL_PICTURE",
-				//"PROPERTY_*",
 				"DETAIL_PAGE_URL",
 				"NAME",
 				"SHOW_COUNTER"

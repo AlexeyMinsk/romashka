@@ -72,26 +72,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12">
-							
-                            <section class="row__inline-blocks mt_3">
-								<div class="h2 text_center _upper title_line_horizontal">
-									<span>Хиты продаж</span>
-								</div>
-								
-								<?$APPLICATION->IncludeComponent("lat:popular", "", array(
-									"IBLOCK_ID" => 1,
-									"COUNTER" => 4
-									));
-								?>
-								<div class="h2 text_center _upper title_line_horizontal mb_3">
-									<span>Популярные товары</span>
-								</div>
-								<?$APPLICATION->IncludeComponent("lat:popular", "", array(
-									"IBLOCK_ID" => 1,
-									"COUNTER" => 4
-									));
-								?>
-							</section>
+							<?$APPLICATION->IncludeComponent("lat:popular", "", array(
+								"IBLOCK_ID" => 1,
+								"COUNTER" => 4,
+								"COMPONENT_TITLE" => array("Хиты продаж", "Популярные товары")	
+							));?>							
 						</div>
 					</div>
 				</div>
@@ -108,7 +93,7 @@
                                             О магазине цветов Romashki.by
 										</div>
                                         <p>Заказывайте доставку цветов в Молодечно. На нашем сайте Вы можете заказать цветы с доставкой в Молодечно. В каталоге Вы найдете букет на любой вкус и случай жизни. И не важно какое сейчас время года. Ведь любовь, ласка и доброта это те чувства, которые всегда помогают преодолеть любые преграды, будь то длительная командировка или разлука. Мы занимаем лидирующую позицию в доставке цветов по Молодечно и уже более 30 довольных получателей радуются нашим</p>
-                                        <a class="_underline" href="#">Подробнее</a>
+                                        <a class="_underline" href="javascript:void(0)">Подробнее</a>
 									</div>
 								</div>
 							</div>
