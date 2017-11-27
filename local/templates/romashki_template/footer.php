@@ -34,10 +34,10 @@
                 <div class="col-xs-12 col-mid-xs-6 col-sm-3 text_center">
                     <div class="footer_title">Мы в соц.сетях</div>
                     <ul class="list_inline mt_2 mb_2 footer_social">
-                        <li><a href="#"><i class="icon _vk"></i></a></li>
-                        <li><a href="#"><i class="icon _fb"></i></a></li>
-                        <li><a href="#"><i class="icon _tw"></i></a></li>
-                        <li><a href="#"><i class="icon _od"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="icon _vk"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="icon _fb"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="icon _tw"></i></a></li>
+                        <li><a href="javascript:void(0)"><i class="icon _od"></i></a></li>
 					</ul>
 				</div>
                 <div class="clear"></div>
@@ -72,6 +72,16 @@
 ?>
 <script>
 	var userId = <?=$userId?>;
+	
+	if(userId == 0){
+	
+		let romashkaUserId = getCookie('romashka_user');
+		console.log(document.cookie);
+		if(romashkaUserId)
+			userId = romashkaUserId;
+		
+		console.log('userId', userId);
+	}
 </script>
 <script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>

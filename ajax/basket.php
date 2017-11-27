@@ -8,6 +8,7 @@
 	
 	if(isset($_POST) && isset($_POST["refresh_mini_bask"])){
 		if (CModule::IncludeModule("sale")){
+		
 			$arResult = CSaleBasket::GetList(array(), array(
 					"FUSER_ID" => CSaleBasket::GetBasketUserID()
 				),
@@ -30,6 +31,13 @@
 			}
 			$quantity = $quantity > 99 ? '99+' : $quantity;
 			$totalPrice = $totalPrice > 1000000 ? "1000000+" : $totalPrice;
-			echo json_encode(array("quantity" => $goods, "totalPrice" => $totalPrice, 'refresh' => 'Y'));
+			
+			echo json_encode(array(
+					"quantity" => $goods,
+					"totalPrice" => $totalPrice,
+					'refresh' => 'Y',
+					//"user_id" => $USER->GetId()
+				)
+			);
 		}
 	}	

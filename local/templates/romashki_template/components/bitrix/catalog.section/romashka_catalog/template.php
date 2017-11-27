@@ -248,13 +248,8 @@
 		$imgSrcArr[$item['ID']] = $item["PREVIEW_PICTURE"]["SRC"] ?
 		$item["PREVIEW_PICTURE"]["SRC"] : $item["DETAIL_PICTURE"]["SRC"];
 	}
-	if($USER->IsAuthorized())
-	$userId = $USER->GetId();
-	else
-	$userId = false;
 ?>
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
 	var imagesSrc = <?=CUtil::PhpToJSObject($imgSrcArr)?>;
-	var userId = <?=$userId?>;
 </script>

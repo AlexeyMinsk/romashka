@@ -92,6 +92,50 @@ document.addEventListener("addWish", function(event){
 	
 	popupImg.src = event.detail.src;
 	popupName.textContent = event.detail.name;
+	
+	let promise = new Promise(function(resolve, reject){
+		
+		if(userId == 0){
+			
+			BX.ajax({
+				method: 'POST',
+				dataType: 'json',
+				url: '/ajax/auth.php',
+				data: {
+					'create_user': 'Y',
+					'romashka_user': userId
+				},
+				onsuccess: function (data){
+					resolve({"userId": data});
+					if(+data)
+						setCookie('romashka_user', data, {expires: 8400});
+				}
+			});
+		}
+		else{
+			resolve({"userId": event.detail.userId});
+		}
+	});
+	
+	promise.then(result => {
+		
+		BX.ajax({
+			method: 'POST',
+			dataType: 'json',
+			url: '/ajax/add-wish.php',
+			data: {
+				'add_wish': 'Y',
+				'item_id': event.detail.id,
+				'user_id': result.userId
+			},
+			onsuccess: function(data){
+				let whishlist = document.getElementsByClassName('counter-whishlist')[0];
+				if(whishlist)
+					whishlist.textContent = data;
+			}
+		});
+	});
+	event.preventDefault();
 });
 
 function startScript(){
@@ -103,9 +147,13 @@ function startScript(){
 		
 		let formData = new FormData(this);
 		let xhr = new XMLHttpRequest();
-		
 		xhr.open('POST', '/ajax/reg.php');
 		xhr.send(formData);
+		
+		xhr.onload = function (){
+			if(+this.responseText)
+				setCookie('romashka_user', this.responseText, {expires: 8400});
+		}
 		
 		$.magnificPopup.close();
 		event.preventDefault();
@@ -115,56 +163,15 @@ function startScript(){
 		
 		let formData = new FormData(this);
 		let xhr = new XMLHttpRequest();
-		
 		xhr.open('POST', '/ajax/auth.php');
 		xhr.send(formData);
 		
+		xhr.onload = function (){
+			if(+this.responseText)
+				setCookie('romashka_user', this.responseText, {expires: 8400});
+		}
+		
 		$.magnificPopup.close();
-		event.preventDefault();
-	});
-	
-	document.addEventListener("addWish", function(event){
-		
-		let promise = new Promise(function(resolve, reject){
-			
-			if(event.detail.userId === 0){
-				
-				BX.ajax({
-					method: 'POST',
-					dataType: 'json',
-					url: '/ajax/auth.php',
-					data: {
-						'create_user': 'Y'
-					},
-					onsuccess: function (data){
-						resolve({"userId": data});
-					}
-				});
-			}
-			else{
-				resolve({"userId": event.detail.userId});
-			}
-		});
-		
-		promise.then(result => {
-
-			BX.ajax({
-				method: 'POST',
-				dataType: 'json',
-				url: '/ajax/add-wish.php',
-				data: {
-					'add_wish': 'Y',
-					'item_id': event.detail.id,
-					'user_id': result.userId
-				},
-				onsuccess: function(data){
-					let whishlist = document.getElementsByClassName('counter-whishlist')[0];
-					if(whishlist)
-						whishlist.textContent = data;
-				}
-			});
-		});
-
 		event.preventDefault();
 	});
 	
@@ -173,21 +180,19 @@ function startScript(){
 }
 
 function refreshMiniBasket(){//обновить конзину при загрузке страницы
-	
-	if(userId){
-		BX.ajax({
-			method: 'POST',
-			dataType: 'json',
-			url: '/ajax/basket.php',
-			data: {
-				'refresh_mini_bask': 'Y'
-			},
-			onsuccess: function (data){
-				elementsCollection.miniBasket.textContent = '(' + data.quantity + ')';
-				elementsCollection.basketSum.textContent = data.totalPrice;
-			}
-		});
-	}
+
+	BX.ajax({
+		method: 'POST',
+		dataType: 'json',
+		url: '/ajax/basket.php',
+		data: {
+			'refresh_mini_bask': 'Y'
+		},
+		onsuccess: function (data){
+			elementsCollection.miniBasket.textContent = '(' + data.quantity + ')';
+			elementsCollection.basketSum.textContent = data.totalPrice;
+		}
+	});
 }
 
 function refreshWishlist(){//обновить список желаний при загрузке страницы
@@ -247,7 +252,7 @@ function setMiniBasketData(event){//при изменении корзины
 }
 
 function sendToBasket(item){
-	console.log(item);
+	
 	BX.ajax({
 		method: 'POST',
 		dataType: 'json',
@@ -258,6 +263,10 @@ function sendToBasket(item){
 			'refresh_mini_bask': 'Y'
 		},
 		onsuccess: function (data){
+			
+			//if(+data['user_id'])
+			//	setCookie('romashka_user', data['user_id'], {expires: 8400});
+			
 			if(data.refresh == 'Y'){
 				elementsCollection.miniBasket.textContent = '(' + data.quantity + ')';
 				elementsCollection.basketSum.textContent = data.totalPrice;
@@ -265,4 +274,3 @@ function sendToBasket(item){
 		}
 	});
 }
-

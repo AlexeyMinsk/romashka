@@ -256,14 +256,8 @@
 	);
 	
 	$imageSrc = $arResult['DETAIL_PICTURE']['SRC'];
-	
-	if($USER->IsAuthorized())
-	$userId = $USER->GetId();
-	else
-	$userId = false;
 ?>
 <script>
 	var item = <?=CUtil::PhpToJSObject($itemsForJs)?>;
-	var userId = <?=$userId?>;
 	var imageSrc = '<?=$imageSrc?>';
 </script>		

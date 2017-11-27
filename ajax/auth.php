@@ -10,8 +10,8 @@
 	else{
 		if(checkRequest($_POST)){
 			
-			$USER->Login($req['login'], $req['pass'], "Y");
-			echo "Вы вошли";
+			$USER->Login($_POST['login'], $_POST['pass'], "Y");
+			echo $USER->GetId();
 		}
 		elseif($_POST["create_user"] == "Y"){
 			
@@ -25,9 +25,10 @@
 			echo $USER->GetID();
 		}
 		else{
-			echo "error";
+			echo 0;
 		}
 	}
+	
 	function checkRequest($req){
 		
 		$flag = false;
