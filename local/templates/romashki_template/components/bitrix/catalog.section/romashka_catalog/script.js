@@ -16,7 +16,7 @@ function startScript(){
 	for(let i = 0; i < inWish.length; i++)	
 		inWish[i].addEventListener('click', addWhishListFn);
 	
-	document.addEventListener("addWish", function(event){
+/* 	document.addEventListener("addWish", function(event){
 
 		BX.ajax({
 			method: 'POST',
@@ -31,9 +31,8 @@ function startScript(){
 				whishlist.textContent = data;
 			}
 		});
-	
 		event.preventDefault();
-	});
+	}); */
 
 	function clickBuyFn(event){
 	
@@ -44,8 +43,7 @@ function startScript(){
 				"src": imagesSrc[id],
 				"name": items[id]["NAME"]
 			}
-		}
-		);
+		});
 		document.dispatchEvent(myEvent);
 		sendToBasket(id);
 	}

@@ -39,7 +39,7 @@ function deleteWishlistItem(event){
 }
 
 function wishlistItemToBasket(event){
-	
+	console.log('click');
 	if(!event.target.classList.contains("icon-basket"))
 		return;
 	
@@ -47,21 +47,21 @@ function wishlistItemToBasket(event){
 	let itemId = parent.dataset.wishlistId;
 	
 	BX.ajax({
-			method: 'POST',
-			dataType: 'json',
-			url: '/ajax/basket.php',
-			data: {
-				'ajax_basket': 'Y',
-				'item': items[itemId],
-				'refresh_mini_bask': 'Y'
-			},
-			onsuccess: function (data){
-				if(data.refresh == 'Y'){
-					let miniBasket = document.getElementsByClassName('basket-quantity')[0];
-					let basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];	
-					miniBasket.textContent = '(' + data.quantity + ')';
-					basketSum.textContent = data.totalPrice;
-				}
+		method: 'POST',
+		dataType: 'json',
+		url: '/ajax/basket.php',
+		data: {
+			'ajax_basket': 'Y',
+			'item': items[itemId],
+			'refresh_mini_bask': 'Y'
+		},
+		onsuccess: function (data){
+			if(data.refresh == 'Y'){
+				let miniBasket = document.getElementsByClassName('basket-quantity')[0];
+				let basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];	
+				miniBasket.textContent = '(' + data.quantity + ')';
+				basketSum.textContent = data.totalPrice;
 			}
-		});
+		}
+	});
 }

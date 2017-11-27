@@ -8,15 +8,15 @@ function startScript(){
 	let basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];	
 	let inBasket = document.querySelectorAll('[href="#card_in_basket"]');
 	let inWish = document.querySelectorAll('[href="#in_wish"]');
-	let whishlist = document.getElementsByClassName('counter-whishlist')[0];
+	//let whishlist = document.getElementsByClassName('counter-whishlist')[0];
 
 	for(let i = 0; i < inBasket.length; i++)	
 		inBasket[i].addEventListener('click', clickBuyFn);
 	
 	for(let i = 0; i < inWish.length; i++)
 		inWish[i].addEventListener('click', addWhishListFn);
-	
-	document.addEventListener("addWish", function(event){
+
+	/* document.addEventListener("addWish", function(event){
 
 		BX.ajax({
 			method: 'POST',
@@ -33,21 +33,22 @@ function startScript(){
 		});
 	
 		event.preventDefault();
-	});
+	}); */
 
 	function clickBuyFn(event){
 	
 		let id = event.target.closest('.card_preview').dataset.cardId;
 		let myEvent = new CustomEvent('clickBuy', {
 			detail:{
-				"id": id,
+				//"id": id,
 				"src": imagesSrc[id],
-				"name": items[id]["NAME"]
+				//"name": items[id]["NAME"],
+				"item": items[id]
 			}
 		}
 		);
 		document.dispatchEvent(myEvent);
-		sendToBasket(id);
+		//sendToBasket(id);
 	}
 	
 	function addWhishListFn(event){
@@ -58,13 +59,14 @@ function startScript(){
 				"id": id,
 				"userId": userId,
 				"src": imagesSrc[id],
-				"name": items[id]["NAME"]
+				"name": items[id]["NAME"],
+				"item": items[id]
 			}
 		});
 		document.dispatchEvent(myEvent);
 	}
 	
-	function sendToBasket(id){
+/* 	function sendToBasket(id){
 		
 		BX.ajax({
 			method: 'POST',
@@ -82,5 +84,5 @@ function startScript(){
 				}
 			}
 		});
-	}
+	} */
 }

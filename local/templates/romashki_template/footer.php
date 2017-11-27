@@ -62,6 +62,17 @@
 		$allScripts = $allScripts . "<script src='". $path ."'></script>";
 	echo $allScripts;
 ?>
+<?
+	if($USER->IsAuthorized()){
+		$userId = $USER->GetId();
+	}
+	else{
+		$userId = 0;
+	}
+?>
+<script>
+	var userId = <?=$userId?>;
+</script>
 <script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>
 </html>

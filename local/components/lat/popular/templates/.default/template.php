@@ -51,15 +51,17 @@
 		
 		$imgSrcArr[$item['ID']] = $item["DETAIL_PICTURE"];
 	}
+	/*
 	if($USER->IsAuthorized()){
 		$userId = $USER->GetId();
 	}
 	else{
-		$userId = 0;//заглушка
+		$userId = 0;
 	}
+*/
 ?>
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
 	var imagesSrc = <?=CUtil::PhpToJSObject($imgSrcArr)?>;
-	var userId = <?=$userId?>;
+	//var userId = <?=$userId?>;
 </script>

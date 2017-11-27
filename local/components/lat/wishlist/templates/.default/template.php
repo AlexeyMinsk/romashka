@@ -45,5 +45,5 @@
 ?>
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
-	var userId = <?=$USER->GetId()?>;
+	//var userId = <?=$USER->GetId()?>;
 </script>

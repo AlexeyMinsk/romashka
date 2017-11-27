@@ -6,8 +6,7 @@
 	
 		public function executeComponent(){
 			
-			$myComp = new self();
-			$myComp->init($this);
+			$this->init($this);
 			
 			if($this->StartResultCache()){
 				$this->IncludeComponentTemplate();
