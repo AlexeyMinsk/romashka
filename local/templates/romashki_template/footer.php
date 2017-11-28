@@ -78,7 +78,6 @@
 		let romashkaUserId = getCookie('romashka_user');
 		
 		if(romashkaUserId){
-			//userId = romashkaUserId;
 			
 			BX.ajax({
 				method: 'POST',
@@ -98,7 +97,7 @@
 			});
 		}
 	}
-	console.log('userId', userId);
+	//console.log('userId', userId);
 </script>
 <script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>

@@ -159,41 +159,45 @@
 								<div class="row__inline-blocks text_center">
 									<?
 										$arItems = array(
-										array(
-										"src" => "/img/cat-3.jpg",
-										"price" => "45000",
-										"decor" => "Джут",
-										),
-										array(
-										"src" => "/img/cat-2.jpg",
-										"price" => "45000",
-										"decor" => "Джут",
-										),
-										array(
-										"src" => "/img/cat-5.jpg",
-										"price" => "45000",
-										"decor" => "Джут",
-										),
-										array(
-										"src" => "/img/cat-1.jpg",
-										"price" => "45000",
-										"decor" => "Джут",
-										),
-										array(
-										"src" => "/img/cat-5.jpg",
-										"price" => "45000",
-										"decor" => "Джут",
-										)
+											array(
+											"src" => "/img/cat-3.jpg",
+											"price" => "45",
+											"decor" => "Джут",
+											),
+											array(
+											"src" => "/img/cat-2.jpg",
+											"price" => "30",
+											"decor" => "Синтипон",
+											),
+											array(
+											"src" => "/img/cat-5.jpg",
+											"price" => "5",
+											"decor" => "Завернуть в газету",
+											),
+											array(
+											"src" => "/img/cat-1.jpg",
+											"price" => "15",
+											"decor" => "Наждачная бумага",
+											),
+											array(
+											"src" => "/img/cat-5.jpg",
+											"price" => "1",
+											"decor" => "Пакет из евроопта",
+											)
 										);
 										
 									foreach($arItems as $item):?>
-									<a href="#" class="add_product">
-										<div class="add_product__pic">
-											<img src="<?=$item['src']?>" alt="img">
-										</div>
-										<div class="card_preview__lnk"><?=$item['decor']?></div>
-										<div class="card_preview__price">+ <?=$item['price']?> руб.</div>
-									</a>
+										<a href="javascript:void(0)" class="add_product"
+										data-decor="<?=$item['decor']?>">
+											<div class="add_product__pic">
+												<img src="<?=$item['src']?>" alt="img">
+											</div>
+											<div class="card_preview__lnk"><?=$item['decor']?></div>
+											<div class="card_preview__price">
+											+ <span data-decor-price="<?=$item['price']?>">
+												<?=$item['price']?></span> руб.
+											</div>
+										</a>
 									<?endforeach;?>	
 								</div>
 							</div>

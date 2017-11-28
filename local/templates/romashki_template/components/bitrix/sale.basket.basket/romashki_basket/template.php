@@ -28,11 +28,16 @@
 						</td>
 						<td>
 							<a class="mt_1 i_block" href="#"> <strong><?=$item["NAME"]?></strong></a>
-							<div class="card_preview__linking">Оформлнение: джут</div>
+							<div class="card_preview__linking"><?=$item["PROPS"][0]["NAME"]?>: <?=$item["PROPS"][0]["VALUE"]?></div>
 						</td>
 						<td>
-							<span class="item-price"><?=str_replace(" ", "", $item["PRICE_FORMATED"])?></span>
-							<div class="card_preview__linking item-sum"><?=str_replace(" ", "", $item["SUM"])?></div>
+						<?
+							$formPrice = str_replace(" ", "", $item["PRICE_FORMATED"]);
+						?>
+							<span class="item-price" data-item-price="<?=floatval($formPrice)?>"><?=$formPrice?></span>
+							<div class="card_preview__linking item-sum" data-decore-price="<?=$item["PROPS"][1]["VALUE"]?>">
+								<?=$item["PROPS"][1]["VALUE"]?> руб.
+							</div>
 						</td>
 						<td>
 							<div class="counter _min">

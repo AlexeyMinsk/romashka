@@ -1,9 +1,17 @@
 <?	
 	require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
 
-	if(isset($_POST) && $_POST["ajax_basket"] === 'Y'){
-		if (CModule::IncludeModule("sale")) 
-			CSaleBasket::Add($_POST["item"]);
+	if(isset($_POST) && $_POST["ajax_basket"] === 'Y' && isset($_POST["item"])){
+		if (CModule::IncludeModule("sale")){ 
+			$item = $_POST["item"];
+			if($_POST["DECOR"] !== "N"){
+				$item["PROPS"][] = $_POST["DECOR"];
+			}
+			if($_POST["DECOR_PRICE"] != 0){
+				$item["PROPS"][] = $_POST["DECOR_PRICE"];
+			}
+			CSaleBasket::Add($item);
+		}
 	}
 	
 	if(isset($_POST) && isset($_POST["refresh_mini_bask"])){
@@ -35,8 +43,7 @@
 			echo json_encode(array(
 					"quantity" => $goods,
 					"totalPrice" => $totalPrice,
-					'refresh' => 'Y',
-					//"user_id" => $USER->GetId()
+					'refresh' => 'Y'
 				)
 			);
 		}

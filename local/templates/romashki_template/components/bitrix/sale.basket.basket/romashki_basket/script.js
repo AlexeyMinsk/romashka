@@ -8,7 +8,8 @@ function startScript(){
 	let delayButtonArr = document.getElementsByClassName('icon-bag');
 	let deleteButtonArr = document.getElementsByClassName('icon-trash');
 	let deleteXArr = document.getElementsByClassName('deleteX');
-	let itemSumArr = document.getElementsByClassName('item-sum');
+	let itemsPrice = document.getElementsByClassName('item-sum');
+	let itemsDecorPrice = document.getElementsByClassName('item-price');
 	let resultSumElem = document.getElementsByClassName('sum-result')[0];
 	let itemQuantity = document.getElementsByClassName('item-quantity')[0];
 	let cargoCost = document.getElementsByClassName('cargo-cost')[0];
@@ -136,7 +137,7 @@ function startScript(){
 		
 		let counterTd = document.querySelector("[data-counter-td='" + elemId + "']");
 		if(counterTd)
-		counterTd.textContent = val;
+			counterTd.textContent = val;
 	}
 	
 	function sendAjax(id, val){//обновляет корзину
@@ -159,22 +160,28 @@ function startScript(){
 		return elem.closest(parentSelector).dataset[data];
 	}
 	
-	function changeSum(parent){//изменение сумму на элементк
+	function changeSum(parent){//изменение сумму на элементах
 		
-		let price = parseFloat(parent.querySelector('.item-price').textContent); 
+		let itemPriceElem = parent.querySelector('.item-price');
+		//let price = itemPriceElem.dataset.itemPrice;
 		let quantity = parseFloat(parent.querySelector('.counter__inp').value);
-		let itemSum = parent.querySelector('.item-sum');
-		itemSum.textContent = price * quantity + " руб.";
-		document.querySelector("[data-sum-td='" + parent.dataset.elemId + "']").textContent = itemSum.textContent;
+		let decorPriceElem = parent.querySelector('.item-sum');
+		itemPriceElem.textContent = itemPriceElem.dataset.itemPrice * quantity + " руб.";
+		decorPriceElem.textContent = decorPriceElem.dataset.decorePrice * quantity + " руб.";
+		document.querySelector("[data-sum-td='" + parent.dataset.elemId + "']").textContent
+			= itemPriceElem.textContent;
+			
 		changeSumResult();
 	}
 	
 	function changeSumResult(){//измененить общую сумму
 		
 		let sum = 0;
-		for(i = 0; i < itemSumArr.length; i++){
-			let tempStr = itemSumArr[i].textContent.replace(" ", "");
-			sum += parseFloat(tempStr);
+		
+		for(i = 0; i < itemsPrice.length; i++){
+			let tempNum = itemsPrice[i].dataset.;//gggggggggggggggggg
+			//let tempStr2 = itemsDecorPrice[i].textContent.replace(" ", "");
+			sum = sum + tempNum;
 		}
 		resultSumElem.textContent = sum + " руб.";
 		

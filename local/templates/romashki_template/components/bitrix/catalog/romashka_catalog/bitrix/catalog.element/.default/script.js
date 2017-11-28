@@ -10,6 +10,9 @@ function startScript(){
 	let minus = document.getElementsByClassName('counter__minus')[0];
 	let plus = document.getElementsByClassName('counter__plus')[0];
 	let counter = document.getElementsByClassName('counter__inp')[0];
+	let addDecorElem = document.querySelectorAll('[data-decor]');
+	let decor = false;
+	let decorPrice = false;
 	
 	counter.value = 1;
 	
@@ -55,14 +58,42 @@ function startScript(){
 		event.preventDefault();
 	});
 	
+	for(let i = 0; i < addDecorElem.length; i++){
+		addDecorElem[i].addEventListener("click", function(event){
+			
+			decor = this.dataset.decor;
+			decorPrice = this.querySelector('[data-decor-price]').dataset.decorPrice;
+			
+		});
+	}
+	
 	function clickBuyFn(event){
 		
 		let id = event.target.closest('[data-card-id]').dataset.cardId;
+		let decorProps = 'N';
+		let decPrice = 0;
+		
+		if(decor){
+			decorProps = {
+				'NAME': "Оформление",
+				'CODE': "DECOR",
+				'VALUE': decor,
+				'SORT': "500"
+			}
+			decPrice = {
+				'NAME': "Цена оформления",
+				'CODE': "DECOR_PRICE",
+				'VALUE': decorPrice,
+				'SORT': "500"
+			}
+		}
 
 		let myEvent = new CustomEvent('clickBuy', {
 			detail:{
 				"src": imageSrc,
-				"item": item
+				"item": item,
+				"DECOR": decorProps,
+				"DECOR_PRICE": decPrice
 			}
 		});
 		document.dispatchEvent(myEvent);
@@ -93,4 +124,5 @@ function startScript(){
 		price.textContent = item["PRICE"] + ' руб.';
 		name.textContent = item["NAME"];
 	}
+
 }

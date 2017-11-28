@@ -73,7 +73,7 @@
     <div class="col-xs-offset-1 col-xs-10 popup_wrap">
         
         <div class="text-center">
-			<p>Вы зарегистрированы.<a href="/" class="logout_rm">Выйти?</a></p>
+			<p>Вы зарегистрированы.<a href="/" class="logout_rm">Выйти?</a>(Временный пользователь будет удалён)</p>
 		</div>
 	</div>
 	<?endif;?>

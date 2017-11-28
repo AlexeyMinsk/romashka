@@ -14,6 +14,6 @@
 		}
 		else{
 			$USER->Logout();
-			echo json_encode($userGroupId);
+			//echo json_encode($userGroupId);
 		}
 	}

@@ -75,7 +75,7 @@ document.addEventListener("clickBuy", function(event){
 	
 	popupImg.src = event.detail.src;
 	popupName.textContent = event.detail.item["NAME"];
-	sendToBasket(event.detail.item);
+	sendToBasket(event.detail.item, event.detail.DECOR, event.detail.DECOR_PRICE);
 });
 
 let elementsCollection = {
@@ -109,6 +109,7 @@ document.addEventListener("addWish", function(event){
 					resolve({"userId": data});
 					if(+data){
 						setCookie('romashka_user', data, {expires: 8400});
+						window.location.reload(true);
 					}
 				}
 			});
@@ -281,7 +282,7 @@ function setMiniBasketData(event){//при изменении корзины
 	}
 }
 
-function sendToBasket(item){
+function sendToBasket(item, decor, decPrice){
 	
 	BX.ajax({
 		method: 'POST',
@@ -290,7 +291,9 @@ function sendToBasket(item){
 		data: {
 			'ajax_basket': 'Y',
 			'item': item,
-			'refresh_mini_bask': 'Y'
+			'refresh_mini_bask': 'Y',
+			'DECOR': decor,
+			'DECOR_PRICE': decPrice
 		},
 		onsuccess: function (data){
 			
