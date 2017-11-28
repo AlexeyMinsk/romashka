@@ -72,16 +72,33 @@
 ?>
 <script>
 	var userId = <?=$userId?>;
-	
+
 	if(userId == 0){
 	
 		let romashkaUserId = getCookie('romashka_user');
-		console.log(document.cookie);
-		if(romashkaUserId)
-			userId = romashkaUserId;
 		
-		console.log('userId', userId);
+		if(romashkaUserId){
+			//userId = romashkaUserId;
+			
+			BX.ajax({
+				method: 'POST',
+				dataType: 'json',
+				url: '/ajax/auth.php',
+				data: {
+					'romashka_user': romashkaUserId,
+					'temp_user_auth': 'Y'
+				},
+				onsuccess: function (data){
+					
+					userId = data;
+					
+					if(data == 0)
+						deleteCookie('romashka_user');
+				}
+			});
+		}
 	}
+	console.log('userId', userId);
 </script>
 <script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>

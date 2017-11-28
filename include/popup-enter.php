@@ -1,4 +1,15 @@
+<?
+	$flag = true;
+	
+	if($USER->IsAuthorized()){
+		$userGroupId = $USER->GetUserGroup();
+		if(!in_array(6, $userGroupId)){
+			$flag = false;
+		}
+	}
+?>
 <div id="popup-enter" data-effect="mfp-zoom-in" class="mfp-with-anim white-popup mfp-hide clearfix">
+	<?if($flag):?>
     <div class="popup_header">
         <div class="title_line_horizontal title_line_decor">
             <span>Войти</span>
@@ -27,4 +38,17 @@
             <a class=" fz_12" href="javascript:void(0)">Зарегистрироваться</a>
 		</div>
 	</div>
+	<?else:?>
+	<div class="popup_header">
+        <div class="title_line_horizontal title_line_decor">
+            <span><?=$USER->GetLogin()?></span>
+		</div>
+	</div>
+    <div class="col-xs-offset-1 col-xs-10 popup_wrap">
+        
+        <div class="text-center">
+			<p>Вы авторизованы.<a href="/" class="logout_rm">Выйти?</a>(Временный пользователь будет удалён)</p>
+		</div>
+	</div>
+	<?endif;?>
 </div>

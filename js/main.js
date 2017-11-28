@@ -107,8 +107,9 @@ document.addEventListener("addWish", function(event){
 				},
 				onsuccess: function (data){
 					resolve({"userId": data});
-					if(+data)
+					if(+data){
 						setCookie('romashka_user', data, {expires: 8400});
+					}
 				}
 			});
 		}
@@ -139,42 +140,71 @@ document.addEventListener("addWish", function(event){
 });
 
 function startScript(){
-	
+
 	elementsCollection.miniBasket = document.getElementsByClassName('basket-quantity')[0];
 	elementsCollection.basketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
+	let logoutElements = document.getElementsByClassName("logout_rm");
+
+	if(document.forms.registration){
 	
-	document.forms.registration.addEventListener('submit', function(event){
+		document.forms.registration.addEventListener('submit', function(event){
+			
+			let formData = new FormData(this);
+			let xhr = new XMLHttpRequest();
+			xhr.open('POST', '/ajax/reg.php');
+			xhr.send(formData);
+			
+			xhr.onload = function (){
+				if(+this.responseText)
+					setCookie('romashka_user', this.responseText, {expires: 8400});
+			}
+			
+			$.magnificPopup.close();
+			event.preventDefault();
+		});
+	}
+	
+	if(document.forms.auth){
+	
+		document.forms.auth.addEventListener('submit', function(event){
+			
+			let formData = new FormData(this);
+			let xhr = new XMLHttpRequest();
+			xhr.open('POST', '/ajax/auth.php');
+			xhr.send(formData);
+			
+			xhr.onload = function (){
+				if(+this.responseText){
+					setCookie('romashka_user', this.responseText, {expires: 8400});
+				}
+			}
+			
+			$.magnificPopup.close();
+			event.preventDefault();
+		});
+	}
+	
+	if(logoutElements && logoutElements.length){
+		for(let i = 0; i < logoutElements.length; i++){
 		
-		let formData = new FormData(this);
-		let xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ajax/reg.php');
-		xhr.send(formData);
-		
-		xhr.onload = function (){
-			if(+this.responseText)
-				setCookie('romashka_user', this.responseText, {expires: 8400});
+			logoutElements[i].addEventListener('click', event => {
+				
+				BX.ajax({
+					method: 'POST',
+					dataType: 'json',
+					url: '/ajax/logout.php',
+					data: {
+						'logout': 'Y'
+					},
+					onsuccess: function (data){
+						deleteCookie('romashka_user');
+						window.location.reload(true);
+					}
+				});
+				event.preventDefault();
+			});
 		}
-		
-		$.magnificPopup.close();
-		event.preventDefault();
-	});
-	
-	document.forms.auth.addEventListener('submit', function(event){
-		
-		let formData = new FormData(this);
-		let xhr = new XMLHttpRequest();
-		xhr.open('POST', '/ajax/auth.php');
-		xhr.send(formData);
-		
-		xhr.onload = function (){
-			if(+this.responseText)
-				setCookie('romashka_user', this.responseText, {expires: 8400});
-		}
-		
-		$.magnificPopup.close();
-		event.preventDefault();
-	});
-	
+	}
 	refreshMiniBasket();
 	refreshWishlist();
 }

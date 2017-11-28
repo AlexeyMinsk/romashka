@@ -22,7 +22,18 @@
 			$randString = 'abcdefghijklnmopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ';
 			$tempUserLogin = Random::getStringByCharsets(13, $randString);
 			$USER->Register($tempUserLogin, "", "", $newPassword, $newPassword, "tempusers@mysite.ru");
-			echo $USER->GetID();
+			
+			$userId = $USER->GetID();
+			$arGroups = CUser::GetUserGroup($userId);
+			$arGroups[] = 6;
+			CUser::SetUserGroup($userId, $arGroups);
+			echo $userId;
+		}
+		elseif($_POST["temp_user_auth"] == "Y"){
+			if($USER->Authorize($_POST["romashka_user"]))
+				echo $_POST["romashka_user"];
+			else
+				echo 0;
 		}
 		else{
 			echo 0;
