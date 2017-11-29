@@ -15,13 +15,15 @@ function startScript(){
 	let itemQuantity = document.getElementsByClassName('item-quantity')[0];
 	let cargoCost = document.getElementsByClassName('cargo-cost')[0];
 	let orderSum = document.getElementsByClassName('result-order-sum')[0];
+	let formOrder = document.forms.order;
+	let formPayment = document.forms.payment;
 	let illustrationOrder = document.getElementsByName('illustration-order')[0];
 	let miniBasketasketSum = document.getElementsByClassName('basket_sum')[0].childNodes[0];
-	let orderTabButtons = document.querySelectorAll('[href="#order"]');
 	
 	const CARGO_LIMIT = 1000;
 	const CARGO_PRICE = 300;
 	
+	//changeSumResult();
 	changeItemQuantity();
 
 	for(let i = 0; i < parentTr.length; i++){
@@ -32,8 +34,9 @@ function startScript(){
 			
 			let counter = this.closest('.counter').getElementsByClassName('counter__inp')[0];
 			counter.value = +counter.value + 1;
-			changeSum(parentTr[i]);
-			changeOrderItemCounter(parentTr[i].dataset.elemId, counter.value);
+			let dataElemId = this.closest('[data-elem-id]');
+			changeSum(dataElemId);
+			changeSumTd(dataElemId.dataset.elemId, counter.value);
 			
 			sendAjax(getParentDataset(counter, "[data-elem-id]", "elemId"), counter.value);
 			return false;
@@ -43,8 +46,9 @@ function startScript(){
 			
 			let counter = this.closest('.counter').getElementsByClassName('counter__inp')[0];
 			counter.value = +counter.value - 1 < 1 ? 1 : +counter.value - 1;
-			changeSum(parentTr[i]);
-			changeOrderItemCounter(parentTr[i].dataset.elemId, counter.value);
+			let dataElemId = this.closest('[data-elem-id]');
+			changeSum(dataElemId);
+			changeSumTd(dataElemId.dataset.elemId, counter.value);
 			sendAjax(getParentDataset(counter, "[data-elem-id]", "elemId"), counter.value);
 			return false;
 		});
@@ -76,36 +80,6 @@ function startScript(){
 			changeItemQuantity();
 			return false;
 		}
-	}
-	
-	for(let i = 0; i < orderTabButtons.length; i++){
-	
-		orderTabButtons[i].addEventListener('click', function(event){
-			
-			let formReady = true;
-			let orderMess = document.getElementsByClassName('big_label')[0];
-			for(let i = 0; i < document.forms.order.elements.length; i++){
-			
-				if(document.forms.order.elements[i].required && !document.forms.order.elements[i].value){
-					formReady = false;
-					break;
-				}
-			}
-			if(formReady){
-				orderMess.textContent = 
-					"Ваш заказ сформирован, пожалуйста проверьте все данные перед подтверждением заказа";
-					
-				if(orderMess.classList.contains('user-order-message'))
-					orderMess.classList.remove('user-order-message');
-			}
-			else{
-				orderMess.textContent = 
-					"Не заполнены все обязательные(помечены звёздочкой) поля формы!";
-					
-				if(!orderMess.classList.contains('user-order-message'))
-					orderMess.classList.add('user-order-message');
-			}
-		});
 	}
 	
 	bindingForm();
@@ -148,8 +122,8 @@ function startScript(){
 			}
 		}
 		
-		document.forms.order.addEventListener("change", changeForm);
-		document.forms.payment.addEventListener("change", changeForm);
+		formOrder.addEventListener("change", changeForm);
+		formPayment.addEventListener("change", changeForm);
 		
 		function changeForm(event){
 			
@@ -161,14 +135,14 @@ function startScript(){
 		}
 	}
 	
-	function changeOrderItemCounter(elemId, val){
+	function changeSumTd(elemId, val){
 		
 		let counterTd = document.querySelector("[data-counter-td='" + elemId + "']");
 		if(counterTd)
 			counterTd.textContent = val;
 	}
 	
-	function sendAjax(id, action){//обновляет корзину
+	function sendAjax(id, val){//обновляет корзину
 		
 		BX.ajax({
 			method: 'POST',
@@ -176,7 +150,7 @@ function startScript(){
 			url: '/ajax/forBasket.php',
 			data: {
 				'ID': id,
-				'VALUE': action
+				'VALUE': val
 			},
 			onsuccess: function (data){
 				//console.log('success!');
@@ -197,8 +171,8 @@ function startScript(){
 		decorPriceElem.textContent = decorPriceElem.dataset.decorePrice * quantity + " руб.";
 		
 		document.querySelector("[data-sum-td='" + parent.dataset.elemId + "']").textContent
-			= (+itemPriceElem.dataset.itemPrice + +decorPriceElem.dataset.decorePrice) * quantity + " руб.";
-		
+			= (itemPriceElem.dataset.itemPrice + decorPriceElem.dataset.decorePrice) * quantity + " руб.";
+			
 		changeSumResult();
 	}
 	

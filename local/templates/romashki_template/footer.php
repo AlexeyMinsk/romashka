@@ -97,7 +97,7 @@
 			});
 		}
 	}
-	//console.log('userId', userId);
+	console.log('userId', userId);
 </script>
 <script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>

@@ -105,7 +105,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-5 text_right_sm">Телефон *</div>
 				<div class="col-xs-12 col-sm-4">
-					<input class="form-control" type="text" name="tel">
+					<input class="form-control" type="text" name="tel" required>
 				</div>
 				<div class="col-xs-12 col-sm-5 text_right_sm">E-mail</div>
 				<div class="col-xs-12 col-sm-4">
@@ -137,7 +137,7 @@
 			</div>	
 		</div>
 		<div role="tabpanel" class="tab-pane" id="order">
-			<div class="big_label">
+			<div class="big_label user-order-message">
 				Ваш заказ сформирован, пожалуйста проверьте все данные перед подтверждением заказа
 			</div>
 			
@@ -169,7 +169,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4">
 				<div class="label_reverse label-danger mt_2 mb_2">
-					Стоимость доставки: <span class="cargo-cost">0</span> руб. <br>
+					Стоимость доставки: <span class="cargo-cost">0</span> руб.<br>
 					Итого: <span class="result-order-sum">0</span> руб.
 				</div>
 				<dl class="dl-horizontal" name="illustration-order">

@@ -20,8 +20,6 @@
 	$items = array();
 	while($item = $DBres->fetch()){
 		
-		//$item['DETAIL_PICTURE'] = CFile::GetPath($item['DETAIL_PICTURE']);
-		//$item['PRICE_ARR'] = CPrice::GetBasePrice($item['ID']);
 		$item['DETAIL_URL'] = menuItement($item['DETAIL_PAGE_URL'], $item['IBLOCK_SECTION_ID'], $item['ID']);
 		$items[] = $item;	
 	}
@@ -109,17 +107,13 @@
 	
 	function menuItement($templateUrl, $sectionId, $id){
 		
-		//$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
-		//return str_replace('#ELEMENT_ID#', $id, $templateUrl);
 		$match = '';
 		preg_match('/\/\w+\//', $templateUrl, $match);
 		return $match[0].$sectionId."/".$id."/";
 	}
 	
 	function menuItemion($templateUrl, $sectionId){
-		
-		//$templateUrl = str_replace('#SITE_DIR#', '', $templateUrl);
-		//return str_replace('#SECTION_ID#', $sectionId, $templateUrl);
+
 		$match = '';
 		preg_match('/\/\w+\//', $templateUrl, $match);
 		return $match[0].$sectionId."/";

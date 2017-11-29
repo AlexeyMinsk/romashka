@@ -3,8 +3,7 @@
 	$APPLICATION->SetTitle("Текстовая страница");
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
-	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
-?>
+	?>
 <main>
 	<section class="g-main">
 		<div class="g-main_i ">

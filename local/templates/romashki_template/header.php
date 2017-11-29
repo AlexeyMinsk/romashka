@@ -10,7 +10,7 @@
 			CUtil::InitJSCore();
 			CJSCore::Init(array("fx"));
 			CJSCore::Init(array('ajax'));
-			//принудительная инициализация BX
+			//принудительная инициализация js библиотеки BX
 			$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/app.min.css", true);
 		?>
 		<title><?$APPLICATION->ShowTitle()?></title>
