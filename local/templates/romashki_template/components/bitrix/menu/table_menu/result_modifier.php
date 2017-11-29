@@ -1,4 +1,5 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+	/*
 	use	Bitrix\Main\Loader;
 	
 	if(!Loader::IncludeModule("iblock")){
@@ -118,3 +119,4 @@
 		preg_match('/\/\w+\//', $templateUrl, $match);
 		return $match[0].$sectionId."/";
 	}
+*/

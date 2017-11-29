@@ -2,33 +2,51 @@
 
 <nav class="aside_menu-2">
 	<ul class="aside_menu-2__list">
-		<?foreach($arResult["MENU"] as $parentList):?>
-		<li class="<?//='active'?>">
-			<a href="<?=$parentList['DETAIL_URL']?>"><?=$parentList['NAME']?>
-				<?if(count($parentList['CHILD'])):?>
+		<?for($i = 0; $i < count($arResult); $i++):?>
+		<li>
+			<a href="<?=$arResult[$i]['LINK']?>"><?=$arResult[$i]['TEXT']?>
+				<?if($arResult[$i]['IS_PARENT']):?>
 				<i class="arr_submenu-2 icon_menu__caret"></i>
 				<?endif?>
 			</a>
+			<?if($arResult[$i]['IS_PARENT']):
+			$i++;	
+			$depth = $arResult[$i]['DEPTH_LEVEL'];?>
 			<ul class="aside_menu-2__list-2">
-				<?foreach($parentList['CHILD'] as $firstChild):?>
-				<li><a href="#"><?=$firstChild['NAME']?>
-					<?if(count($firstChild['CHILD'])):?>
-						<i class="icon_menu__caret"></i>
-					</a>
-				<ul class="aside_menu-2__list-3">
-					<?foreach($firstChild['CHILD'] as $child):?>
-					<li>
-						<a href="#"><?=$child['NAME']?></a>
+				
+				<?while($depth == $arResult[$i]['DEPTH_LEVEL']):?>
+
+					<li><a href="<?=$arResult[$i]['LINK']?>">
+							<?=$arResult[$i]['TEXT']?>
+							<?if($arResult[$i]['IS_PARENT']):?>
+							<i class="arr_submenu-2 icon_menu__caret"></i>
+							<?endif?>
+						</a>
+						<?if($arResult[$i]['IS_PARENT']):
+							$i++;
+							$depth = $arResult[$i]['DEPTH_LEVEL'];?>
+							<ul class="aside_menu-2__list-3">	
+								<?while($depth == $arResult[$i]['DEPTH_LEVEL']):?>
+
+									<li><a href="<?=$arResult[$i]['LINK']?>">
+										<?=$arResult[$i]['TEXT']?>
+										<?if($arResult[$i]['IS_PARENT']):?>
+											<i class="arr_submenu-2 icon_menu__caret"></i>
+										<?endif?>
+									</a>
+									</li>
+									<?$i++;?>
+								<?endwhile;?>
+							</ul>
+							<?$i--;?>
+						<?endif;?>
 					</li>
-					<?endforeach?>
-				</ul>
-				<?else:?>
-				</a>
-				<?endif?>
-				</li>
-				<?endforeach?>
+					<?$i++;?>
+				<?endwhile;?>
 			</ul>
+			<?$i--;?>
+			<?endif;?>
 		</li>
-		<?endforeach?>
+		<?endfor;?>
 	</ul>
 </nav>
