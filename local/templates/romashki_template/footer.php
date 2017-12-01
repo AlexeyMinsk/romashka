@@ -46,7 +46,8 @@
                     <div class="fl_left">
                         2016 "Romashka.by" Магазин цветов в г.Молодечно
 					</div>
-                    <div class="fl_right ">Разработка сайта - <a target="_blank" href="imedia.by"><img src="<?=SITE_DIR.'img/im-logo.png'?>" alt="img"></a></div>
+                    <div class="fl_right ">Разработка сайта - <a target="_blank" href="imedia.by">
+						<img src="<?=SITE_TEMPLATE_PATH.'/img/im-logo.png'?>" alt="img"></a></div>
 				</div>
 			</div>
 		</div>
@@ -54,13 +55,11 @@
 </footer>
 <?
 	foreach($includeArr as $path)//подключение скриптов
-		if(file_exists($_SERVER["DOCUMENT_ROOT"].$path))
-			require_once($_SERVER["DOCUMENT_ROOT"].$path);
-	
-	$allScripts = "";
+		if(file_exists($_SERVER['DOCUMENT_ROOT'].$path))
+			require_once($_SERVER['DOCUMENT_ROOT'].$path);
+		
 	foreach($scriptsArr as $path)
-		$allScripts = $allScripts . "<script src='". $path ."'></script>";
-	echo $allScripts;
+		$APPLICATION->AddHeadScript($path);
 ?>
 <?
 	if($USER->IsAuthorized()){
@@ -97,8 +96,8 @@
 			});
 		}
 	}
-	console.log('userId', userId);
+	//console.log('userId', userId);
 </script>
-<script src="<?=SITE_DIR.'js/main.js'?>"></script>
 </body>
+<script src="<?=SITE_TEMPLATE_PATH?>/js/main.js"></script>
 </html>

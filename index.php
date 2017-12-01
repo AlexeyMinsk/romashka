@@ -4,8 +4,8 @@
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "Y");
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-	"/include/card_in_basket.php",
-	"/include/in_wish.php"
+		SITE_TEMPLATE_PATH."/include/card_in_basket.php",
+		SITE_TEMPLATE_PATH."/include/in_wish.php"
 	));
 ?>
 
@@ -64,21 +64,22 @@
 		<div class="row">
 			<?
 				$main_label_arr = array(
-				"Зачем куда-то ходить? Доставим бесплатно!",
-				"Всегда только свежие цветы!",
-				"Пришлем фото Вашего букета!"
+					"Зачем куда-то ходить? Доставим бесплатно!",
+					"Всегда только свежие цветы!",
+					"Пришлем фото Вашего букета!"
 				);
-			?> <?foreach($main_label_arr as $text):?>
-			<div class="col-xs-12 col-sm-4">
-				<div class="main_label">
-					<div class="main_label__pic _1">
+			?> 
+			<?foreach($main_label_arr as $text):?>
+				<div class="col-xs-12 col-sm-4">
+					<div class="main_label">
+						<div class="main_label__pic _1">
+						</div>
+						<div class="main_label__text">
+							<?=$text?>
+						</div>
 					</div>
-					<div class="main_label__text">
-						<?=$text?>
-					</div>
-			</div>
-		</div>
-		<?endforeach;?>
+				</div>
+			<?endforeach;?>
 	</div>
 </div>
 </div>
@@ -92,9 +93,9 @@
 							"lat:popular",
 							"",
 							Array(
-							"COMPONENT_TITLE" => array("Хиты продаж","Популярные товары"),
-							"COUNTER" => 4,
-							"IBLOCK_ID" => 1
+								"COMPONENT_TITLE" => array("Хиты продаж","Популярные товары"),
+								"COUNTER" => 4,
+								"IBLOCK_ID" => 1
 							)
 						);?>
 					</div>
@@ -106,7 +107,7 @@
 						<div class="col-xs-12 main_about">
 							<div class="row">
 								<div class="col-xs-12 col-sm-4">
-									<img alt="img" src="/img/about.jpg" class="img-responsive img_about">
+									<img alt="img" src="<?=SITE_TEMPLATE_PATH?>/img/about.jpg" class="img-responsive img_about">
 								</div>
 								<div class="col-xs-12 col-sm-8">
 									<div class=" h3 mt_0">
@@ -123,5 +124,6 @@
 				</div>
 			</div>
 		</div>
-	</section> </main>
+	</section>
+	</main>
 	</div><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>	

@@ -4,9 +4,9 @@
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
-	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js"));
+	$scriptsArr = array_merge($scriptsArr, array(SITE_TEMPLATE_PATH."/js/vendor/tab.min.js"));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-	"/include/popup-rduction.php"
+		SITE_TEMPLATE_PATH."/include/popup-rduction.php"
 	));
 ?>
 <main>

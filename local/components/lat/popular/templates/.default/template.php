@@ -14,7 +14,7 @@
 					</a>
 					<div class="card_preview__info">
 						<div class="raiting text_center">
-							<img src="/img/raiting.png" alt="img">
+							<img src="<?=SITE_TEMPLATE_PATH?>/img/raiting.png" alt="img">
 						</div>
 						<div class="card_preview__prod_name">
 							<a class="card_preview__lnk lnk_brd" href="javascript:void(0)"   title="<?=$item["NAME"]?>">
@@ -42,26 +42,17 @@
 	foreach($arResult["ITEMS"] as $item){
 		
 		$itemsForJs[$item['ID']] = array(
-		"PRODUCT_ID" => $item['ID'],
-		"PRICE" => $item['PRICE_ARR']['PRICE'],
-		"CURRENCY" => "RUB",
-		"LID" => "s1",
-		"NAME" => $item['NAME']
+			"PRODUCT_ID" => $item['ID'],
+			"PRICE" => $item['PRICE_ARR']['PRICE'],
+			"CURRENCY" => "RUB",
+			"LID" => "s1",
+			"NAME" => $item['NAME']
 		);
 		
 		$imgSrcArr[$item['ID']] = $item["DETAIL_PICTURE"];
 	}
-	/*
-	if($USER->IsAuthorized()){
-		$userId = $USER->GetId();
-	}
-	else{
-		$userId = 0;
-	}
-*/
 ?>
 <script>
 	var items = <?=CUtil::PhpToJSObject($itemsForJs)?>;
 	var imagesSrc = <?=CUtil::PhpToJSObject($imgSrcArr)?>;
-	//var userId = <?=$userId?>;
 </script>

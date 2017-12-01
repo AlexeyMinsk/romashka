@@ -16,5 +16,13 @@ $arTemplateParameters = array(
 		"DEFAULT" => "N",
 		"PARENT" => 'ADDITIONAL_SETTINGS',
 	),
+	"DECOR_IBLOCK_ID" => Array(
+		"NAME" => GetMessage("DECOR_IBLOCK_ID"),
+		"TYPE" => "STRING",
+		"MULTIPLE" => "N",
+		"DEFAULT" => 3,
+		"PARENT" => "BASE",
+	)
+
 );
 ?>

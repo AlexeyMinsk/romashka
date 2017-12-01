@@ -2,22 +2,22 @@
 	require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	$APPLICATION->SetTitle("Каталог");
 	$scriptsArr = array_merge($scriptsArr, array(
-	"/js/vendor/tab.min.js", 
-	"/js/vendor/spritespin.min.js",
-	"/js/vendor/menu_collapse.min.js"
+		SITE_TEMPLATE_PATH."/js/vendor/tab.min.js", 
+		SITE_TEMPLATE_PATH."/js/vendor/spritespin.min.js",
+		SITE_TEMPLATE_PATH."/js/vendor/menu_collapse.min.js"
 	));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-	"/include/card_in_basket.php",
-	"/include/in_wish.php",
-	"/include/popup-rduction.php",
-	"/include/popup-click.php"
+		SITE_TEMPLATE_PATH."/include/card_in_basket.php",
+		SITE_TEMPLATE_PATH."/include/in_wish.php",
+		SITE_TEMPLATE_PATH."/include/popup-rduction.php",
+		SITE_TEMPLATE_PATH."/include/popup-click.php"
 	));
 ?>	
 <main>
 	<?$APPLICATION->IncludeComponent(
-		"bitrix:catalog", 
-		"romashka_catalog", 
-		array(
+	"bitrix:catalog", 
+	"romashka_catalog", 
+	array(
 		"COMPONENT_TEMPLATE" => "romashka_catalog",
 		"IBLOCK_TYPE" => "catalog",
 		"IBLOCK_ID" => "1",
@@ -46,7 +46,7 @@
 		"PRODUCT_ID_VARIABLE" => "id",
 		"USE_COMPARE" => "N",
 		"PRICE_CODE" => array(
-		0 => "BASE_PRICE",
+			0 => "BASE_PRICE",
 		),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
@@ -69,8 +69,8 @@
 		"TOP_ELEMENT_SORT_FIELD2" => "id",
 		"TOP_ELEMENT_SORT_ORDER2" => "desc",
 		"TOP_PROPERTY_CODE" => array(
-		0 => "",
-		1 => "",
+			0 => "",
+			1 => "",
 		),
 		"SECTION_COUNT_ELEMENTS" => "Y",
 		"SECTION_TOP_DEPTH" => "2",
@@ -81,8 +81,8 @@
 		"ELEMENT_SORT_FIELD2" => "id",
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"LIST_PROPERTY_CODE" => array(
-		0 => "",
-		1 => "",
+			0 => "",
+			1 => "",
 		),
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"LIST_META_KEYWORDS" => "-",
@@ -90,8 +90,8 @@
 		"LIST_BROWSER_TITLE" => "-",
 		"SECTION_BACKGROUND_IMAGE" => "-",
 		"DETAIL_PROPERTY_CODE" => array(
-		0 => "",
-		1 => "",
+			0 => "",
+			1 => "",
 		),
 		"DETAIL_META_KEYWORDS" => "-",
 		"DETAIL_META_DESCRIPTION" => "-",
@@ -169,7 +169,7 @@
 		"TOP_ADD_TO_BASKET_ACTION" => "ADD",
 		"SECTION_ADD_TO_BASKET_ACTION" => "ADD",
 		"DETAIL_ADD_TO_BASKET_ACTION" => array(
-		0 => "BUY",
+			0 => "BUY",
 		),
 		"SEARCH_PAGE_RESULT_COUNT" => "50",
 		"SEARCH_RESTART" => "N",
@@ -196,8 +196,8 @@
 		"DETAIL_PRODUCT_PAY_BLOCK_ORDER" => "rating,price,priceRanges,quantityLimit,quantity,buttons",
 		"DETAIL_SHOW_SLIDER" => "N",
 		"DETAIL_DETAIL_PICTURE_MODE" => array(
-		0 => "POPUP",
-		1 => "MAGNIFIER",
+			0 => "POPUP",
+			1 => "MAGNIFIER",
 		),
 		"DETAIL_ADD_DETAIL_TO_SLIDER" => "N",
 		"DETAIL_DISPLAY_PREVIEW_TEXT_MODE" => "E",
@@ -214,7 +214,7 @@
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"MESS_SHOW_MAX_QUANTITY" => "Наличие",
 		"DETAIL_ADD_TO_BASKET_ACTION_PRIMARY" => array(
-		0 => "BUY",
+			0 => "BUY",
 		),
 		"TOP_PROPERTY_CODE_MOBILE" => "",
 		"TOP_PRODUCT_BLOCKS_ORDER" => "price,props,sku,quantityLimit,quantity,buttons,compare",
@@ -224,20 +224,21 @@
 		"TOP_SLIDER_INTERVAL" => "3000",
 		"TOP_SLIDER_PROGRESS" => "N",
 		"SEF_FOLDER" => "/catalog/",
+		"DECOR_IBLOCK_ID" => "3",
 		"SEF_URL_TEMPLATES" => array(
-		"sections" => "",
-		"section" => "#SECTION_ID#/",
-		"element" => "#SECTION_ID#/#ELEMENT_ID#/",
-		"compare" => "compare.php?action=#ACTION_CODE#",
-		"smart_filter" => "#SECTION_ID#/filter/#SMART_FILTER_PATH#/apply/",
+			"sections" => "",
+			"section" => "#SECTION_ID#/",
+			"element" => "#SECTION_ID#/#ELEMENT_ID#/",
+			"compare" => "compare.php?action=#ACTION_CODE#",
+			"smart_filter" => "#SECTION_ID#/filter/#SMART_FILTER_PATH#/apply/",
 		),
 		"VARIABLE_ALIASES" => array(
-		"compare" => array(
-		"ACTION_CODE" => "action",
-		),
+			"compare" => array(
+				"ACTION_CODE" => "action",
+			),
 		)
-		),
-		false
-	);?>	
+	),
+	false
+);?>	
 </main>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

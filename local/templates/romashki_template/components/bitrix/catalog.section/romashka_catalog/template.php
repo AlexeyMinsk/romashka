@@ -6,11 +6,12 @@
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js", "/js/vendor/menu_collapse.min.js"));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей
-	"/include/card_in_basket.php",
-	"/include/in_wish.php",
-	"/include/popup-rduction.php"
+		"/include/card_in_basket.php",
+		"/include/in_wish.php",
+		"/include/popup-rduction.php"
 	));
 ?>
+<?if(count($arResult['ITEMS'])):?>
 <section class="g-main">
 	<div class="container">
 		<div class="row">
@@ -75,7 +76,7 @@
 				<a href="javascript:void(0)" class="label_filter">Одноголовая хризантема</a>
 				<a href="javascript:void(0)" class="label_filter active">Одноголовая хризантема</a>
 				<section class="row__inline-blocks mt_3">
-					<?foreach($arResult['ITEMS'] as $key => $item){
+					<?foreach($arResult['ITEMS'] as $key => $item):
 
 						if(isset($item['DETAIL_PICTURE']) && is_array($item['DETAIL_PICTURE']) )
 								$DETAIL_PICTURE = $item['DETAIL_PICTURE']['SRC'];
@@ -124,7 +125,7 @@
 							</div>
 						</div>
 					</div>
-					<?}?>
+					<?endforeach;?>
 				</section>
 			</div>
 			<div class="text_center">
@@ -186,7 +187,7 @@
 							
 							if(empty($PICTURE))
 								$PICTURE = array('SRC' => '/img/no-foto.jpg');	
-						?>
+					?>
 						<div class="col-xs-12 col-mid-xs-6 col-sm-4 col-md-3">
 							<div class="card_preview">
 								<div class="card_preview__wrap_hidden">
@@ -225,13 +226,22 @@
 					<?endforeach;?>
 				</div>
 				
-				<p>
-					Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео.
-				Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео. Текст категории, для сео.</p>
+				<p><?=$arResult['DESCRIPTION']?></p>
 			</div>
 		</div>
 	</div>
 </section>
+<?else:?>
+<div class="container">
+	<div class="row">
+		<h1>Раздел не содержит активных элементов, выберите другой <a href="/catalog">раздел!</a></h1>
+		<img src="" alt="">
+	</div>
+	<p><?=$arResult['DESCRIPTION']?></p>
+</div>
+
+
+<?endif;?>
 <?
 	$itemsForJs = array();
 	$imgSrcArr = array();
@@ -239,14 +249,14 @@
 	foreach($arResult["ITEMS"] as $item){
 		
 		$itemsForJs[$item['ID']] = array(
-		"PRODUCT_ID" => $item['ID'],
-		"PRICE" => $item['ITEM_PRICES'][0]['BASE_PRICE'],
-		"CURRENCY" => "RUB",
-		"LID" => "s1",
-		"NAME" => $item['NAME'],
+			"PRODUCT_ID" => $item['ID'],
+			"PRICE" => $item['ITEM_PRICES'][0]['BASE_PRICE'],
+			"CURRENCY" => "RUB",
+			"LID" => "s1",
+			"NAME" => $item['NAME'],
 		);
 		$imgSrcArr[$item['ID']] = $item["PREVIEW_PICTURE"]["SRC"] ?
-		$item["PREVIEW_PICTURE"]["SRC"] : $item["DETAIL_PICTURE"]["SRC"];
+			$item["PREVIEW_PICTURE"]["SRC"] : $item["DETAIL_PICTURE"]["SRC"];
 	}
 ?>
 <script>

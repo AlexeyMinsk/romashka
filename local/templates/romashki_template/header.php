@@ -6,17 +6,15 @@
 	<head>
 		<?
 			$APPLICATION->ShowHead();
-			
+			//принудительная инициализация js библиотеки BX  и подключение расширения 'ajax'
 			CUtil::InitJSCore();
-			CJSCore::Init(array("fx"));
 			CJSCore::Init(array('ajax'));
-			//принудительная инициализация js библиотеки BX
 			$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/css/app.min.css", true);
 		?>
 		<title><?$APPLICATION->ShowTitle()?></title>
 		<meta name="format-detection" content="telephone=no">
 		<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
-		<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body class="<?$APPLICATION->ShowProperty('bodyClass');?>" id="_pr">
 		<div id="panel"><?$APPLICATION->ShowPanel();?></div>
@@ -41,7 +39,7 @@
 							<div class="col-xs-12 col-mid-xs-12 col-sm-4 col-md-4 header_phone text-center">
 								<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
 									"AREA_FILE_SHOW" => "file",
-									"PATH" => SITE_DIR."include/company_tel.php")
+									"PATH" => SITE_TEMPLATE_PATH."/include/company_tel.php")
 									,false
 								);?>
 							</div>
@@ -59,7 +57,7 @@
 							<div class="row__inline-blocks">
 								<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array(
 									"AREA_FILE_SHOW" => "file",
-									"PATH" => SITE_DIR."include/company_logo.php")
+									"PATH" => SITE_TEMPLATE_PATH."/include/company_logo.php")
 									,false
 								);?>
 								<div class="col-xs-12 col-sm-6 col-md-4">
@@ -99,17 +97,17 @@
 			$APPLICATION->ShowNavChain();
 			$APPLICATION->SetPageProperty('not_title', ' ');
 			$includeArr = array(//массив возможных включаемых областей
-			"/include/popup-enter.php",
-			"/include/popup-registration.php"
+				SITE_TEMPLATE_PATH."/include/popup-enter.php",
+				SITE_TEMPLATE_PATH."/include/popup-registration.php"
 			);
 			$scriptsArr = array(
-			'/js/cookie.js',
-			'/js/vendor/jquery.2.1.4.min.js',
-			'/js/vendor/collapse.min.js',
-			'/js/vendor/dropdown.min.js',
-			'/js/vendor/pushy.min.js',
-			'/js/vendor/jquery.magnific-popup.min.js',
-			'/js/vendor/transition.min.js',
-			'/js/vendor/owl.carousel.min.js',
+				SITE_TEMPLATE_PATH.'/js/cookie.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/jquery.2.1.4.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/collapse.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/dropdown.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/pushy.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/jquery.magnific-popup.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/transition.min.js',
+				SITE_TEMPLATE_PATH.'/js/vendor/owl.carousel.min.js',
 			);
 		?>						
