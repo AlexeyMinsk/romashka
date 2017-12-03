@@ -15,10 +15,15 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<?
+			$objectOG = new OpenGraph();
+			$objectOG->setOG();
+			$objectOG->showOG();
+		?>
 	</head>
 	<body class="<?$APPLICATION->ShowProperty('bodyClass');?>" id="_pr">
 		<div id="panel"><?$APPLICATION->ShowPanel();?></div>
-		<?$APPLICATION->ShowProperty('uniqueDataHeader');?>
+		<?$APPLICATION->ShowViewContent('uniqueDataHeader')?>
 		
 		<header class="container-fluid header_3">
 			<div class="header_content">
@@ -100,7 +105,7 @@
 				SITE_TEMPLATE_PATH."/include/popup-enter.php",
 				SITE_TEMPLATE_PATH."/include/popup-registration.php"
 			);
-			$scriptsArr = array(
+			$scriptsArr = array(//массив подключаемых скриптов
 				SITE_TEMPLATE_PATH.'/js/cookie.js',
 				SITE_TEMPLATE_PATH.'/js/vendor/jquery.2.1.4.min.js',
 				SITE_TEMPLATE_PATH.'/js/vendor/collapse.min.js',

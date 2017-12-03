@@ -1,8 +1,7 @@
 <?if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
 	$APPLICATION->SetPageProperty('bodyClass', $APPLICATION->GetCurPage(true));
-	$APPLICATION->SetPageProperty('uniqueDataHeader', '<div class="g-wrapper">');
-	$APPLICATION->SetPageProperty('uniqueDataFooter', '</div>');
+	$APPLICATION->AddViewContent('uniqueDataHeader', '<div class="g-wrapper">');
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
 	$scriptsArr = array_merge($scriptsArr, array("/js/vendor/tab.min.js", "/js/vendor/menu_collapse.min.js"));
 	$includeArr = array_merge($includeArr, array(//массив возможных включаемых областей

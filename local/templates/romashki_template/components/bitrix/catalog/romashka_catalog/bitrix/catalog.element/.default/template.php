@@ -3,7 +3,7 @@
 	$APPLICATION->SetTitle($arResult['NAME']);
 	$APPLICATION->SetPageProperty('bodyId', $APPLICATION->GetCurPage(true));
 	$APPLICATION->SetPageProperty("NOT_SHOW_NAV_CHAIN", "N");
-	$APPLICATION->SetPageProperty('uniqueDataHeader', "
+	$APPLICATION->AddViewContent('uniqueDataHeader', "
 		<script>
 			document.getElementsByTagName('body')[0].classList.add('load_opacity');
 			document.addEventListener('DOMContentLoaded', function(){
